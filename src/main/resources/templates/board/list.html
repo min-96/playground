@@ -6,8 +6,17 @@
 </head>
 <body>
 	<h1>LIST</h1>
-	<form th:action="@{/board/register}"> <!-- 경로 -->
-	<input type="submit" value="register(GET)"> <!-- 메서드 매핑 -->
+<!-- 	<h2>http요청방식</h2>
+	<form th:action="@{/board/register}"> 경로
+	<input type="submit" value="register(GET)"> 메서드 매핑
+	</form> -->
+	<h2>param매핑</h2>
+	<a th:href="@{/board/get?register}">Register</a>
+	
+	<form th:action="@{/board/post}" method="post"> <!-- 경로 -->
+	<input type="submit" name="register"> <!-- 메서드 매핑 -->
 	</form>
+	
+	<a th:href="@{/board/get?modify}">Modify</a>
 </body>
 </html>

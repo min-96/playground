@@ -21,20 +21,35 @@ public class BoardController {
 	
 	//value속성에 요청경로를 설정한다
 	//@RequestMapping("/register")
-	@GetMapping("/register")
+	//@GetMapping("/register")
+	@GetMapping(value="/get",params="register")
 	public String registerForm() {
 		log.info("registerForm");
 		return "board/register";
 	}
+	@PostMapping(value="/post", params="register")
+	public String register() {
+		log.info("register");
+		return "board/modify";
+	}
+	
 	//@RequestMapping("/modify")
-	@PostMapping("/modify")
+	//@PostMapping("/modify")
+	@GetMapping(value="/get",params="modify")
 	public String modifyForm() {
 		log.info("modifyForm");
 		return "board/modify";
 	}
-	@RequestMapping("/list")
+	@PostMapping(value="/post",params="modify")
+	public String modify() {
+		log.info("modify");
+		return "board/list";
+	}
+	@GetMapping("/list")
 	public void listForm() {
 		log.info("listForm");
+		
+		
 	}
 	//경로 패턴 지정
 	@GetMapping("/read/{boardNo}")
@@ -43,5 +58,7 @@ public class BoardController {
 		//경로가 변하므로 뷰 이름 지정
 		return "board/read";
 	}
+	
+	
 
 }
