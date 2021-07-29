@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	 <a th:href="@{register?userId=hong&password=1234}">
+	registerByParameter
+	</a><br>
+	
+	<a th:href="@{register/hong/100}">registerByPath</a><br>
+	
+	
+	<form th:action="@{register01}" method="post">
+	userId<input type="text" name="userId" value="hongkd"><br>
+	password<input type="text" name="password" value="1234"><br>
+	coin<input type ="text" name="coin" value="1">
+	<input type="submit" value="전송">
+	</form>
+	<br>
+	<br>
+	
+	<h3>RequestParam</h3>
+	<form th:action="@{register02}" method="post">
+	userId<input type="text" name="userId" value="hongkd"><br>
+	password<input type="text" name="password" value="1234"><br>
+	coin<input type ="text" name="coin" value="1">
+	<input type="submit" value="전송">
+	</form>
+	
+	<br>
+	<br>
+	<h3>요청처리 자바빈즈</h3>
+	<form th:action="@{register03}" method="post">
+	uId<input type="text" name ="uId"><br>
+	userId<input type="text" name="userId"><br>
+	password<input type="text" name="password"><br>
+	coin<input type ="text" name="coin">
+	<input type="submit" value="전송">
+	</form>
+	
+	<br>
+	<h3>Date 타입처리</h3>
+	<a th:href="@{registerByGet01?userId=hong&dateOfBirth=20190801}">dateOfBirth</a><br>
+	
+		<br>
+	<h3>복수선택 셀렉트박스</h3>
+	<form th:action="@{register04}" method="post">
+	carArray<select name="carArray" multiple>
+	<option value="volvo">Volvo</option>
+	<option value="audi">Audi</option>
+	<option value="bents">Bents</option> 
+	</select><br>
+	<input type="submit" value="전송">
+	</form>
+	
+
+</body>
+</html>
