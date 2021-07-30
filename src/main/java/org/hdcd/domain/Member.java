@@ -3,6 +3,7 @@ package org.hdcd.domain;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,5 +26,12 @@ public class Member {
 	private int coin;
 	@DateTimeFormat(pattern="yyyyMMdd")
 	private LocalDate dateOfBirth;
+	
+	private String developer;
+	
+	private Address address;
+	
+	private List<Card> cardList;
+	
 
 }

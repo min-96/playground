@@ -55,6 +55,57 @@
 	<input type="submit" value="전송">
 	</form>
 	
+	<br>
+	
+	<form th:action="@{register05}" method="post">
+	Are you developer?:<input type="checkbox" name="developer" value="Y">
+	<input type="checkbox" name="developer" value="N">
+	<br>
+	<input type="submit" value="전송">
+	</form>
+	<br>
+	
+	<form th:action="@{register06}" method="post">
+	카드1-번호 <input type="text" name="cardList[0].no" />
+	카드1-유효년일 <input type="text" name="cardList[0].validMonth" />
+	<br>
+	카드1-번호 <input type="text" name="cardList[1].no" />
+	카드1-유효년일 <input type="text" name="cardList[1].validMonth" />
+	<br>
+	<input type="submit" value="전송">
+	</form>
+	
+	
+	<br>
+	<h3>파일 업로드 폼 요청 처리방식</h3>
+	<form th:action="@{registerFile01}" method="post" encType="multipart/form-data">
+	<input type="file" name="picture"> <input type="submit" value="전송">
+	</form>
+	
+	
+	<br>
+	<form th:action="@{registerFile02}" method="post" encType="multipart/form-data">
+	userID : <input type="text" name="userId">
+	password : <inpurt type="password" name="password">
+	File <input type="file" name="picture">
+	<input type="file" name="picture"> 
+	<input type="submit" value="전송">
+	</form>
 
+	<h3>파일 자바빈즈 여러개 처리하기</h3>
+	<form th:action="@{registerFile03}" method="post" encType="multipart/form-data">
+	<input type="file" name="pictureList">
+	<br>
+	<input type="file" name="pictureList">
+	<input type="submit" value="전송">
+	</form>
+	
+		<h3>파일 배열로 처리하기</h3>
+	<form th:action="@{registerFile04}" method="post" encType="multipart/form-data">
+	<input type="file" name="pictureList">
+	<br>
+	<input type="file" name="pictureList">
+	<input type="submit" value="전송">
+	</form>
 </body>
 </html>

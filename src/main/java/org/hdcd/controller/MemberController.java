@@ -1,7 +1,10 @@
 package org.hdcd.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import org.hdcd.domain.Card;
+import org.hdcd.domain.FileMember;
 import org.hdcd.domain.Member;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -99,6 +103,80 @@ public class MemberController {
 		else
 			log.info(null);
 		return "sucess";
+	}
+	@PostMapping("/register05")
+	public String register05(Member m) {
+		//if(developer=="Y") {
+	
+//			log.info(developer);
+//		}
+//		else if(developer=="N") {
+//			log.info("N");
+//		}
+//		else {
+//			log.info("null");
+//		}
+//		
+		return "sucess";
+	}
+	
+	@PostMapping("/register06")
+	public String register06(Member m) {
+		List<Card> cardList = m.getCardList();
+		if(cardList!=null) {
+			for(int i=0; i<cardList.size(); i++) {
+				Card card = cardList.get(i);
+				log.info(card.getNo());
+				log.info("validd"+card.getValidMonth());
+			}
+		}
+		else {
+			log.info("null");
+		}
+		return "sucess";
+	}
+	//파일 업로드 폼 방식 요청처리
+	@PostMapping("/registerFile01")
+	public String registerFile01(MultipartFile picture) {
+		//스프링 mvc가 지원하는 multipartFile 매개변수로 처리한다
+		if(picture!=null) {
+		log.info(picture.getOriginalFilename());
+		log.info("size"+picture.getSize());
+		log.info("contentType" + picture.getContentType());
+		}
+		else {
+			log.info(null);
+		}
+		return "sucess";
+		
+	}
+	@PostMapping("/registerFile02")
+	public String registerFile02(FileMember fileMember) {
+		log.info(fileMember.getUserId());
+		MultipartFile picture = fileMember.getPicture(); 
+		return "sucess";
+	}
+	@PostMapping("/registerFile03")
+	public String registerFile03(FileMember fileMember) {
+		List<MultipartFile> pictureList = fileMember.getPictureList();
+		for(MultipartFile picture: pictureList) {
+			log.info(picture.getOriginalFilename());
+			
+		}
+		
+		return"sucess";
+		
+	}
+	@PostMapping("/registerFile04")
+	public String registerFile03(MultipartFile[] pictureList) {
+	
+		for(MultipartFile picture: pictureList) {
+		log.info(picture.getOriginalFilename());
+			
+		}
+		
+		return"sucess";
+		
 	}
 }
 
