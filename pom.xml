@@ -50,6 +50,13 @@
 	 <artifactId>mysql-connector-java</artifactId> 
 	</dependency> 
 
+<!-- 타임리프 레이아웃 다이얼렉트 라이브러리 -->
+<dependency>
+  <groupId>nz.net.ultraq.thymeleaf</groupId>
+  <artifactId>thymeleaf-layout-dialect</artifactId>
+</dependency>
+
+
 	</dependencies>
 
 	<build>

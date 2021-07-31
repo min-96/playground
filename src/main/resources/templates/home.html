@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.thymeleaf.org"
+xmlns:layout="http//www.ultrq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/main_template}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Hello World</h1>
+<!-- <div layout:fragment="header">
+헤더다 여기가 내가 대체할곳인가?
+</div> -->
+
+<!-- <div th:insert="~{fragment/header::header}"></div> -->
+
+
+<div layout:fragment="content">
+
+<h1>Hello World</h1>
 	
 	<p th:text="${serverTime}"> 현재 서버시간은 ${serverTime}.</p>
+</div>
 	
+<!-- <div th:insert="~{fragment/footer::footer}"></div> -->
 </body>
 </html>

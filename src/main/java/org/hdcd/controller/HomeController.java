@@ -28,18 +28,18 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	//private static final Logger logger =LoggerFactory.getLogger(HomeController.class);
 	
-//	@RequestMapping(value="/",method=RequestMethod.GET)
-//	public String home(Locale locale,Model model) {
-//		//logger.info("Welcom home! The Client locale is {}.",locale);
-//		log.info("Welcom home! The client locale is" +locale+".");
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG,locale);
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime",formattedDate);
-//	
-//		return "home";
-//	}
+	@RequestMapping(value="/",method=RequestMethod.GET)
+	public String home(Locale locale,Model model) {
+		//logger.info("Welcom home! The Client locale is {}.",locale);
+		log.info("Welcom home! The client locale is" +locale+".");
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG,locale);
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime",formattedDate);
+	
+		return "home";
+	}
 //	@ResponseBody // 객체 반환할땐 responseBody //자동으로 JSON으로 변환
 //	@GetMapping("/goHome0301")
 //	public Board home0301() {
