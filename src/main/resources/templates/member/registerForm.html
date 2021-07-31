@@ -107,5 +107,13 @@
 	<input type="file" name="pictureList">
 	<input type="submit" value="전송">
 	</form>
+	
+	<form th:action="@{registerModel}" method="post">
+	아이디<input type="text" name="userId">
+	비밀번호 <input type="text" name="password">
+	<input type="submit" value="전송">
+	</form>
+	
+	
 </body>
 </html>

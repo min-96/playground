@@ -1,6 +1,7 @@
 package org.hdcd.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hdcd.domain.Card;
@@ -8,6 +9,7 @@ import org.hdcd.domain.FileMember;
 import org.hdcd.domain.Member;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -178,5 +180,58 @@ public class MemberController {
 		return"sucess";
 		
 	}
+	
+	@GetMapping("/read01")
+	public String read01(Model model) {
+		//model 객체를 통해서 다양한 데이터를 뷰에 전달할수있다
+		log.info("read01");
+		Member member = new Member();
+		member.setUserId("hong");
+		member.setPassword("1234");
+		LocalDate dateOfBirth = LocalDate.of(2020, 3, 2);
+		member.setDateOfBirth(dateOfBirth);
+		model.addAttribute(member);
+		model.addAttribute("user",member); // user이름으로 보냄
+		return "member/read01";
+	}
+	@GetMapping("/read02")
+	public String read02(Model model) {
+		log.info("read02");
+		String[] carArray= {"saab","audi"};
+		List<String> carList = new ArrayList<String>();
+		carList.add("bentz");
+		carList.add("audi");
+		model.addAttribute("carArray",carArray);
+	//	model.addAttribute(carList);
+		return "member/read02";
+	}
+	
+	@GetMapping("/read03")
+	public String read03(Model model) {
+		Member member= new Member();
+		
+		String[] carArray= {"hyundae","s5"};
+		member.setCarArray(carArray);
+		
+		List<String> carList = new ArrayList<>();
+		carList.add("ssdsd");
+		carList.add("sdasdasd");
+		member.setCarList(carList);
+		
+		model.addAttribute(member);
+		return "member/read03";
+	}
+	
+	@PostMapping("/registerModel")
+	public String registerModel(Member member) {
+		log.info("registerModel");
+		log.info(member.getUserId());
+		return "result01";
+		
+	}
+	
+//	RedirectAttributes은 일회성으로 데이터를 전달하는 용도
+	
 }
+
 

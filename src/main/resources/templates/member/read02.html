@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>자동차 리스트</h3>
+	<div th:each="car:${carArray}" th:text="${car}"></div>
+	<br>
+	<h3>자동차 리스트2</h3>
+	<!-- <div th:each="${carList}"></div> -->
+</body>
+</html>

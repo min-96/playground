@@ -33,5 +33,7 @@ public class Member {
 	
 	private List<Card> cardList;
 	
+	private String[] carArray;
+	private List<String> carList;
 
 }
