@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -34,24 +34,91 @@
 	
 	
 	
-	<h3>hashMap</h3>
-	<form action="result.html" th:action="@{register}"
-	th object="${member}" method="post">
+	<h3>HashMap</h3>
+	<form action ="/register" method ="post">
 	<table>
 	<tr>
 	<td>
-	<th:block th:each="element:${carMap}">
-	<input type="checkbox" th:field="*{carList}" th:value="${element.key}" />
-	<label th:for="${#ids.prev{'carList')}" th:text="${element.value}">스포츠</label>
+	<input type="checkbox" value="01" id="carList1" name="carList"/>
+	<input type="hidden" name="_carList" value="on">
+	<label for="carList1">Audi</label> 
+	</table>
+	
+	<input type="checkbox" value="02" id="carList2" name="carList"/>
+	<input type="hidden" name="_carList" value="on"/>
+	<label for="carList2">Bents</label>
+
+	</td>
+	</tr>
+	</table>
+	
+	<button type="submit">등록</button>
+	
+	
+	</form>
+	
+	
+	
+	<h3>HashMap</h3>
+	<form action ="/register" th:action="@{register}" th:object="${member}" method ="post">
+
+	<table>
+	<tr>
+	<td>
+	<th:block th:each="carCode:${carList}"> 
+	<input type="checkbox" th:field="*{carList}" th:value="${carCode.value}" />
+	<label th:for="${#ids.prev('carList')}" th:text="${carCode.label}">sport</label>
+	</th:block> 
+	</td>
+	</tr>
+	</table>
+	
+	<button type="submit">등록</button>
+	
+	
+	</form>
+	
+	
+	<form action="result.html" th:action="@{register}"
+	th:object="${member}" method="post">
+	<table border="1">
+	<tr>
+	<td>성별</td>
+	<td>
+	<th:block th:each="element:${genderMap}">
+	<input type="radio" th:field="*{gender}"
+	th:value="${element.value}"/>
+	<label th:for="${#ids.prev('gender')}"
+	th:text="${element.value}">Sport</label>
 	</th:block>
 	</td>
 	</tr>
 	</table>
 	<button name="register" type="submit">등록</button>
+	</form>
+-----------------------------------------------------------------------
+
+	<form action ="/register" method ="post">
+	<table>
+	<tr>
+	<td>
+	<input type="radio" value="01" id="gender1" name="gender"/>
+	<label for="gender1">Male</label> 
+	</table>
+	
+	<input type="radio" value="02" id="gender2" name="gender"/>
+	<label for="gender2">Female</label>
+
+	</td>
+	</tr>
+	</table>
+	
+	<button type="submit">등록</button>
+	
 	
 	</form>
 	
-
+	
 
 
 </body>

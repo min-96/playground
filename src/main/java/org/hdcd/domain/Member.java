@@ -36,5 +36,7 @@ public class Member {
 	
 	private String[] carArray;
 	private List<String> carList;
+	
+	private String gender;
 
 }

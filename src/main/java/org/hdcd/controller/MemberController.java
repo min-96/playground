@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hdcd.domain.Card;
+import org.hdcd.domain.CodeLabelValue;
 import org.hdcd.domain.FileMember;
 import org.hdcd.domain.Member;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javassist.compiler.MemberCodeGen;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -270,14 +272,14 @@ public class MemberController {
 	
 	
 	
-	@PostMapping("/register")
-	public String register(Member member) {
-		log.info("register");
-		log.info(member.getUserId());
-		return "sucess";
-		
-	}
-	
+//	@PostMapping("/register")
+//	public String register(Member member) {
+//		log.info("register");
+//		log.info(member.getUserId());
+//		return "sucess";
+//		
+//	}
+//	
 	@GetMapping("/registerForm4")
 	public String registerForm4(Model model){
 		Map<String,String> carMap = new HashMap<>();
@@ -292,6 +294,42 @@ public class MemberController {
 	}
 //	RedirectAttributes은 일회성으로 데이터를 전달하는 용도
 	
+	@GetMapping("/registerForm5")
+	public String registerForm5(Model model) {
+		List<CodeLabelValue> carList=new ArrayList<>();
+		carList.add(new CodeLabelValue("01","Sport"));
+		carList.add(new CodeLabelValue("02","Audi"));
+		
+		model.addAllAttributes(carList);
+		model.addAttribute("member",new Member());
+		
+		return "registerForm";
+	}
+	
+	
+	//---------------------------------------------------------------
+	@GetMapping("/registerForm6")
+	public String registerForm6(Model model) {
+		
+		Map<String,String> genderMap = new HashMap<>();
+		genderMap.put("01", "Male");
+		genderMap.put("02", "Female");
+		Member member = new Member();
+		model.addAttribute("genderMap",genderMap);
+		model.addAttribute(member);
+		return "registerForm";
+	}
+	
+	
+	@PostMapping("/register")
+	public String register(Member member,Model model) {
+		log.info("register");
+		log.info(member.getGender());
+		model.addAttribute("gender",member.getGender());
+		//log.info(member.getUserId());
+		return "sucess";
+		
+	}
 }
 
 
