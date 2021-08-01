@@ -23,6 +23,7 @@ public class Member {
 	
 	private String userId;
 	private String password;
+	private String userName;
 	private int coin;
 	@DateTimeFormat(pattern="yyyyMMdd")
 	private LocalDate dateOfBirth;
