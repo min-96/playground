@@ -13,6 +13,10 @@ import org.hdcd.domain.Member;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -321,15 +325,56 @@ public class MemberController {
 	}
 	
 	
+//	@PostMapping("/register")
+//	public String register(Member member,Model model) {
+//		log.info("register");
+//		log.info(member.getGender());
+//		model.addAttribute("gender",member.getGender());
+//		//log.info(member.getUserId());
+//		return "sucess";
+//		
+//	}
+	//입력값 검증을 할 도메인 클래스에 @validated지정
+//	---------------------------------------------------------
 	@PostMapping("/register")
-	public String register(Member member,Model model) {
-		log.info("register");
-		log.info(member.getGender());
-		model.addAttribute("gender",member.getGender());
-		//log.info(member.getUserId());
-		return "sucess";
+	public String register(@Validated Member member,BindingResult result) {
+		//에러정보 확인을 위한 BindingResult메소드
 		
+		if(result.hasErrors()) {//에러가 발생한 경우 true반환한다.
+			//입력값 검증후 bindingResult가 제공하는 메서드를 이용하여 검사결과를 확인
+			
+			List<ObjectError> allError =result.getAllErrors();
+			List<ObjectError> globalError = result.getGlobalErrors();
+	
+			List<FieldError> fieldError=result.getFieldErrors();
+			for(int i=0; i<allError.size();i++) {
+				ObjectError error=allError.get(i);
+				log.info("allError="+error);
+			}
+			for(int i=0; i<globalError.size();i++) {
+				ObjectError error=globalError.get(i);
+				log.info("globalError="+error);
+			}
+			
+			for(int i=0; i<fieldError.size();i++) {
+				ObjectError error=fieldError.get(i);
+				log.info("fieldError="+error);
+			}
+		
+			
+			return "member/registerForm1";
+		}
+		log.info("member.getUserId",member.getUserId());
+		log.info("member,getGender",member.getUserName());
+		return "sucess";
 	}
+	@GetMapping("registerForm7")
+	public String registerForm7(Model model) {
+		model.addAttribute("member",new Member());
+		return "member/registerForm1";
+	}
+	
+	
 }
 
 

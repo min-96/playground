@@ -5,6 +5,9 @@ package org.hdcd.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -21,8 +24,11 @@ import lombok.ToString;
 @ToString
 public class Member {
 	
+	@NotBlank //입력값 검증 규칙을 지정한다
 	private String userId;
 	private String password;
+	@NotBlank
+	@Size(max=3) // 여러개의 입력값 검증 규칙을 지정할수있다
 	private String userName;
 	private int coin;
 	@DateTimeFormat(pattern="yyyyMMdd")

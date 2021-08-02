@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="result.html" th:action="@{register}"
+	th:object="${member}" method="post">
+	<table border="1">
+	<tr>
+	<td>유저 ID</td>
+	<td>
+	<input type="text" name="text" th:field="*{userId}"/>
+	<span th:errors="*{userId}">userId 에러메세지</span>
+	</td>
+	<tr>
+	<td>유저이름</td>
+	<td><input type="text" name="text" th:field="*{userName}"/>
+	<span th:errors="*{userName}">UserName 에러메세지</span>
+	</td>
+	</tr>
+	
+	</table>
+	<button name="register" type="submit">등록</button>
+	
+	
+	
+	</form>
+</body>
+</html>
