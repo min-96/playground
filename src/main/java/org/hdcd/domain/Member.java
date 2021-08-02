@@ -5,7 +5,10 @@ package org.hdcd.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,8 +34,12 @@ public class Member {
 	@Size(max=3) // 여러개의 입력값 검증 규칙을 지정할수있다
 	private String userName;
 	private int coin;
-	@DateTimeFormat(pattern="yyyyMMdd")
+	//@Future
+	@Past // 과거날짜인지를 검사
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dateOfBirth;
+	@Email
+	private String email;
 	
 	private String developer;
 	

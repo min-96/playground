@@ -21,6 +21,20 @@
 	</td>
 	</tr>
 	
+	<tr>
+	<td>유저이메일</td>
+	<td><input type="text" name="text" th:field="*{email}"/>
+	<span th:errors="*{email}">email 에러메세지</span>
+	</td>
+	</tr>
+	
+	<tr>
+	<td>유저 생년월일</td>
+	<td><input type="text" name="dateOfBirth" th:field="*{dateOfBirth}"/>
+	<span th:errors="*{dateOfBirth}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+	
 	</table>
 	<button name="register" type="submit">등록</button>
 	
