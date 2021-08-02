@@ -30,10 +30,51 @@
 	
 	<tr>
 	<td>유저 생년월일</td>
-	<td><input type="text" name="dateOfBirth" th:field="*{dateOfBirth}"/>
+	<td><input type="date" name="dateOfBirth" th:field="*{dateOfBirth}"/>
 	<span th:errors="*{dateOfBirth}">생년월일 에러메세지</span>
 	</td>
 	</tr>
+	
+	<tr>
+	<td>유저 우편번호</td>
+	<td><input type="text" name="adress" th:field="*{address.postCode}"/>
+	<span th:errors="*{address}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+		<tr>
+	<td>유저 주소</td>
+	<td><input type="text" name="adress" th:field="*{address.location}"/>
+	<span th:errors="*{address}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+	
+	<tr>
+	<td>카드번호</td>
+	<td><input type="text" name="card" th:field="*{cardList[0].no}"/>
+	<span th:errors="*{cardList[0].no}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+	<tr>
+	<td>카드유효번호</td>
+	<td><input type="text" name="card" th:field="*{cardList[0].validMonth}"/>
+	<span th:errors="*{cardList[0].validMonth}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+	
+	<tr>
+	<td>카드번호2</td>
+	<td><input type="text" name="card" th:field="*{cardList[1].no}"/>
+	<span th:errors="*{cardList[1].no}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+	<tr>
+	<td>카드유효번호2</td>
+	<td><input type="text" name="card" th:field="*{cardList[1].validMonth}"/>
+	<span th:errors="*{cardList[1].validMonth}">생년월일 에러메세지</span>
+	</td>
+	</tr>
+	
+	
 	
 	</table>
 	<button name="register" type="submit">등록</button>

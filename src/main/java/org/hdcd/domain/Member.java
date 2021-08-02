@@ -5,6 +5,7 @@ package org.hdcd.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
@@ -42,9 +43,11 @@ public class Member {
 	private String email;
 	
 	private String developer;
-	
+	//중첩된 자바빈즈의 입력값 검증 지정
+	@Valid
 	private Address address;
-	
+	//자바빈즈 컬렉션의 입력값 검증을 지정
+	@Valid
 	private List<Card> cardList;
 	
 	private String[] carArray;
