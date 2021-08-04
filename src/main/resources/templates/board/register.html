@@ -5,11 +5,24 @@
 <title>BOARD</title>
 </head>
 <body>
-<h1>REGISTER</h1>
-<form th:action="@{/board/modify}" method="post"> <!-- 경로 -->
-	<input type="submit" value="modify(POST)"> <!-- 메서드 매핑 -->
+<h1>회원가입</h1>
+<form th:action="@{register}" method="post"
+th:object="${board}"> <!-- 경로 -->
+	<table>
+	<tr>
+	<td>아이디</td>
+	<td><input type="text" name="userId" th:field="*{userId}"/>
+	<span th:if="${#fields.hasErrors('userId')}" th:error="*{userID}">
+	</span>
+	</td>
+	
+	<tr>
+	<td>비밀번호
+	
+	
+	</table>
 	</form>
 	
-	<a th:href="@{/board/get?list}">List</a>
+	
 </body>
 </html>

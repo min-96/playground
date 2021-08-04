@@ -244,7 +244,7 @@ public class MemberController {
 		
 		log.info("registerForm1");
 		Member member= new Member();
-		model.addAttribute(member);
+		model.addAttribute(member); // 데이터 전달
 	return "registerForm";
 	}
 	
