@@ -5,22 +5,32 @@
 <title>BOARD</title>
 </head>
 <body>
-<h1>회원가입</h1>
+<h1>게시물 작성하기</h1>
 <form th:action="@{register}" method="post"
 th:object="${board}"> <!-- 경로 -->
 	<table>
 	<tr>
-	<td>아이디</td>
-	<td><input type="text" name="userId" th:field="*{userId}"/>
-	<span th:if="${#fields.hasErrors('userId')}" th:error="*{userID}">
+	<td>title</td>
+	<td><input type="text" name="title" th:field="*{title}"/>
+ 	<span th:if="${#fields.hasErrors('title')}" th:error="*{title}">
 	</span>
 	</td>
 	
 	<tr>
-	<td>비밀번호
+	<td>writer</td>
+	<td><input type="text" name="writer" th:field="*{writer}"/>
+	<span th:if="${#fields.hasErrors('writer')}" th:error="*{writer}">
+	</span>
+	</td>
+	
+	<tr>
+	<td>content</td>
+	<td><textarea name="content" th:fied="*{content}"></textarea>
+	</td>
 	
 	
 	</table>
+	<input type="submit" value="전송">
 	</form>
 	
 	

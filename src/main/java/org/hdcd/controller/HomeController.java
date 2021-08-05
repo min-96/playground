@@ -54,10 +54,10 @@ public class HomeController {
 	public List<Board> home04() {
 		log.info("home04");
 		List<Board> list = new ArrayList<>();
-		Board board = new Board("어린왕자","파울료코엘료");
-		list.add(board);
-		Board board2 = new Board("도비야","생일축하해");
-		list.add(board2);
+	//	Board board = new Board("어린왕자","파울료코엘료");
+	//	list.add(board);
+	//	Board board2 = new Board("도비야","생일축하해");
+	//	list.add(board2);
 		return list;
 	}
 	//<map>타입
@@ -66,10 +66,10 @@ public class HomeController {
 	public Map<String,Board> home05(){
 		log.info("home5");
 		Map<String,Board> map = new HashMap<>();
-		Board b = new Board("지금은","새벽5시");
-		map.put("key1", b);
-		Board b1 = new Board("2ne1","아파");
-		map.put("key2", b1);
+	//	Board b = new Board("지금은","새벽5시");
+	//	map.put("key1", b);
+	//	Board b1 = new Board("2ne1","아파");
+	//	map.put("key2", b1);
 		return map;
 	}
 

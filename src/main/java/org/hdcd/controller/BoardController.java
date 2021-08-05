@@ -1,6 +1,7 @@
 package org.hdcd.controller;
 
 import org.hdcd.domain.Board;
+import org.hdcd.domain.Member;
 import org.hdcd.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jdk.internal.org.jline.utils.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +30,8 @@ public class BoardController {
 	private BoardService bservice;
 	
 	@GetMapping("/register")
-	public void registerForm(Board board,Model model) {
+	public String registerForm(Board board,Model model) {
+		return "board/register";
 	
 	}
 	
@@ -52,7 +55,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(Model model,int boardNo) {
+	public String remove(Model model,int boardNo) throws Exception {
 		bservice.remove(boardNo);
 		model.addAttribute("msg", "삭제가 완료되었습니다");
 		return "board/sucess";
@@ -64,7 +67,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(Board board,Model model) {
+	public String modify(Board board,Model model) throws Exception {
+		log.info("boardNo"+board.getBoardNo());
+		log.info(board.getWriter());
 		
 		bservice.modify(board);
 		model.addAttribute("msg", "수정이 완려되았습니다");

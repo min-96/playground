@@ -2,6 +2,8 @@ package org.hdcd.domain;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +26,7 @@ import lombok.ToString;
 public class Board {
 	private int boardNo;
 	//@NonNull
+	//@NotBlank
 	private String title;
 	//@NonNull
 	private String content;
