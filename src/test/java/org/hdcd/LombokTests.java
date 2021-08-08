@@ -1,3 +1,4 @@
+package org.hdcd;
 //package org.hdcd.LombokTests;
 //
 //import org.hdcd.domain.Board;

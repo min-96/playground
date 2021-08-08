@@ -61,9 +61,9 @@ public class Member {
 //	@DateTimeFormat(pattern="yyyy-MM-dd")
 //	private LocalDate dateOfBirth;
 	
-	@Temporal(TemporalType.DATE) // 자바util date 타입을 매핑할때는 @Temporal어테테이션사용
+	//@Temporal(TemporalType.DATE) // 자바util date 타입을 매핑할때는 @Temporal어테테이션사용
 	//@CreationTimestamp
-	private LocalDateTime joinDate;
+//	private LocalDateTime joinDate;
 	
 	//하이버네이트가 제공하는 기능으로 엔티티가 생성되거나 업데이트되는 시점의 날짜 데이터를 기록하는 설정
 	
