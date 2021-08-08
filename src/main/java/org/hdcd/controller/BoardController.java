@@ -1,7 +1,8 @@
 package org.hdcd.controller;
 
+import java.time.LocalDateTime;
+
 import org.hdcd.domain.Board;
-import org.hdcd.domain.Member;
 import org.hdcd.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jdk.internal.org.jline.utils.Log;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+@RequiredArgsConstructor
+//final 선언된 빈에 의존성 주입
 @Controller
 @Slf4j
 //클래스 레벨 요청경로지정
@@ -26,17 +30,22 @@ public class BoardController {
 	//private static final Logger logger=LoggerFactory.getLogger(BoardController.class);
 	
 	//필드기반 의존성 주입
-	@Autowired
-	private BoardService bservice;
+	//@Autowired
+	//private BoardService bservice;
+	
+	private final BoardService bservice;
+	
 	
 	@GetMapping("/register")
 	public String registerForm(Board board,Model model) {
+		
 		return "board/register";
 	
 	}
 	
 	@PostMapping("/register")
 	public String register(Board board,Model model) throws Exception {
+		board.setRegDate(LocalDateTime.now());
 		bservice.register(board); // set을 했으니 게시판을 넘김
 		model.addAttribute("msg","등록이 완료되었습니다");
 		
@@ -50,19 +59,19 @@ public class BoardController {
 	}
 	
 	@GetMapping("/read")
-	public void read(Model model,int boardNo) throws Exception {
+	public void read(Model model,Long boardNo) throws Exception {
 		model.addAttribute(bservice.read(boardNo));
 	}
 	
 	@PostMapping("/remove")
-	public String remove(Model model,int boardNo) throws Exception {
+	public String remove(Model model,Long boardNo) throws Exception {
 		bservice.remove(boardNo);
 		model.addAttribute("msg", "삭제가 완료되었습니다");
 		return "board/sucess";
 		
 	}
 	@GetMapping("/modify")
-	public void modify(Model model,int boardNo) throws Exception {
+	public void modify(Model model,Long boardNo) throws Exception {
 		model.addAttribute(bservice.read(boardNo));
 	}
 	
