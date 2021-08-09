@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.hdcd.constant.Gender;
 import org.hdcd.domain.Member;
+import org.hdcd.domain.QMember;
 import org.hdcd.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
 
 @SpringBootTest
 public class MemberTests {
@@ -146,52 +149,77 @@ public class MemberTests {
 //	
 	
 
-	@Test
-	public void JPQLtest01() {
-		List<Member> memberList = memberRepository.getList01("user3");
-		
-		for(Member m : memberList) {
-			System.out.println(m);
-		}
-	}
+//	@Test
+//	public void JPQLtest01() {
+//		List<Member> memberList = memberRepository.getList01("user3");
+//		
+//		for(Member m : memberList) {
+//			System.out.println(m);
+//		}
+//	}
+////	
+//	
+//	@Test
+//	public void JPQLtest02() {
+//		List<Member> memberList = memberRepository.getList02("pw8");
+//		for(Member m :memberList) {
+//			System.out.println(m);
+//		}
+//		
+//	}
+//	
+//	@Test
+//	public void JPQLtest03() {
+//		List<Member> memberList = memberRepository.getList03("min5");
+//		for(Member m:memberList) {
+//			System.out.println(m);
+//		}
+//	}
+//	
+//	@Test
+//	public void JPQLtest04() {
+//		Pageable pageRequest= PageRequest.of(0, 10,Sort.Direction.DESC,"userNo");
+//		
+//		List<Member> memberList=memberRepository.getList04(pageRequest);
+//		
+//		for(Member m : memberList) {
+//			System.out.println(m);
+//		}
+//	}
+//	
+//	@Transactional
+//	@Test
+//	public void JPQLtest05() {
+//		String userId="user1";
+//		String newuserName = "roasd";
+//		int count = memberRepository.updateMemberNameById(userId, newuserName);
+//		System.out.println("count"+count);
+//	}
+//	
 //	
 	
-	@Test
-	public void JPQLtest02() {
-		List<Member> memberList = memberRepository.getList02("pw8");
-		for(Member m :memberList) {
-			System.out.println(m);
-		}
-		
-	}
+	
+//	
+//	-------------------------------------------------
+	
+//	@Test
+//	public void testRegister() {
+//		for(int i=0; i<10; i++) {
+//			long userNo=i+1;
+//			Member member = new Member();
+//			member.setUserId("user"+userNo);
+//			member.setPassword("pw"+userNo);
+//			member.setUserName("min"+userNo);
+//			
+//			memberRepository.save(member);
+//		}
+//	}
 	
 	@Test
-	public void JPQLtest03() {
-		List<Member> memberList = memberRepository.getList03("min5");
-		for(Member m:memberList) {
-			System.out.println(m);
-		}
+	public void testList01() {
+		//쿼리의 조건 설정인 where뒤의 조건을 생성해주는 것이라고 생각하면 된다.
+		BooleanBuilder builder = new BooleanBuilder();
+		QMember member = QMember.member;
+	
 	}
-	
-	@Test
-	public void JPQLtest04() {
-		Pageable pageRequest= PageRequest.of(0, 10,Sort.Direction.DESC,"userNo");
-		
-		List<Member> memberList=memberRepository.getList04(pageRequest);
-		
-		for(Member m : memberList) {
-			System.out.println(m);
-		}
-	}
-	
-	@Transactional
-	@Test
-	public void JPQLtest05() {
-		String userId="user1";
-		String newuserName = "roasd";
-		int count = memberRepository.updateMemberNameById(userId, newuserName);
-		System.out.println("count"+count);
-	}
-	
-	
 }
