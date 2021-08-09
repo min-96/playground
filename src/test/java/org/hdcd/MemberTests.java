@@ -18,7 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
+import com.querydsl.core.BooleanBuilder;
+
+
 
 @SpringBootTest
 public class MemberTests {
@@ -220,6 +222,65 @@ public class MemberTests {
 		//쿼리의 조건 설정인 where뒤의 조건을 생성해주는 것이라고 생각하면 된다.
 		BooleanBuilder builder = new BooleanBuilder();
 		QMember member = QMember.member;
-	
+		//사용자 아이디 검색
+		builder.and(member.userId.eq("user7"));
+		
+		Iterable<Member> memberList = memberRepository.findAll(builder);
+		
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
 	}
+	
+	@Test
+	public void testList02() {
+		BooleanBuilder builder = new BooleanBuilder();
+		QMember member = QMember.member;
+		builder.and(member.password.eq("pw8"));
+		Iterable<Member> memberList = memberRepository.findAll(builder);
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
+	}
+	
+	
+	@Test
+	public void testList03() {
+		BooleanBuilder builder = new BooleanBuilder();
+		QMember member = QMember.member;
+		
+		builder.and(member.userName.like("%min%"));
+		Iterable<Member> memberList = memberRepository.findAll(builder);
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
+	}
+	@Test
+	public void testList04() {
+		BooleanBuilder builder = new BooleanBuilder();
+		QMember member = QMember.member;
+		//userNo>5
+		builder.and(member.userNo.gt(5));
+		Iterable<Member> memberList =memberRepository.findAll(builder);
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
+	}
+	
+	@Test
+	public void testList05() {
+		BooleanBuilder builder = new BooleanBuilder();
+		QMember member = QMember.member;
+		
+		builder.and(member.userNo.gt(0));
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<Member> result = memberRepository.findAll(builder, pageable);
+		
+		List<Member> memberList = result.getContent();
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
+	}
+	
+	
 }
