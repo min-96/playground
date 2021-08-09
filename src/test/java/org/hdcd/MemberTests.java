@@ -11,6 +11,11 @@ import org.hdcd.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class MemberTests {
@@ -18,54 +23,18 @@ public class MemberTests {
 	@Autowired
 	MemberRepository memberRepository;
 
-	@Test
-	public void testRegister() {
-		
-//		List<Member> memberList = new ArrayList<>();
-//		Member member1= new Member();
-//		member1.setUserId("akdcnd23");
-//		member1.setPassword("1234");
-//		member1.setUserName("rosita");
-//		member1.setGender(Gender.FEMALE);
+
+
+//	
+//	@Test
+//	public void testList() {
+////		System.out.println("###_1 findAll before");
+//		Iterable<Member> memberList = memberRepository.findAll();
+////		System.out.println("###_1 fineAll after");
 //		
-//
-//		memberList.add(member1);
-////		System.out.println("###_1 save before");
-////		memberRepository.save(member1);
-////		System.out.println("###_1 save after");
-//		
-//		
-//		Member member2 = new Member();
-//		member2.setUserId("bans23");
-//		member2.setPassword("0000");
-//		member2.setUserName("beronica");
-//		member2.setGender(Gender.MALE);
-//		
-//		
-//		memberList.add(member2);
-//		memberRepository.saveAll(memberList);
-		
-		
-		for(int i=0; i<10; i++) {
-			long userNo = i+1;
-			Member member = new Member();
-			member.setUserId("user"+userNo);
-			member.setPassword("pw"+userNo);
-			member.setUserName("min"+userNo);
-			memberRepository.save(member);
-		
-		}
-	}
-	
-	@Test
-	public void testList() {
-//		System.out.println("###_1 findAll before");
-		Iterable<Member> memberList = memberRepository.findAll();
-//		System.out.println("###_1 fineAll after");
-		
-		for(Member member:memberList) {
-			System.out.println(member);
-		}
+//		for(Member member:memberList) {
+//			System.out.println(member);
+//		}
 		
 //		List<Long> idList = new ArrayList<>();
 //		idList.add(2L);
@@ -76,18 +45,64 @@ public class MemberTests {
 //		for(Member member:memberList) {
 //			System.out.println(member);
 //		}
-	}
+//	}
 	
 	
-	@Test
-	public void testList01() {
-		List<Member> memberList = memberRepository.findByUserId("user7");
-		
-		for(Member member : memberList) {
-			System.out.println(member);
-		}
-	}
+//	@Test
+//	public void testList01() {
+//		List<Member> memberList = memberRepository.findByUserId("user7");
+//		
+//		for(Member member : memberList) {
+//			System.out.println(member);
+//		}
+//	}
+//	
+//	
+//	@Test
+//	public void testList02() {
+//		Pageable pageRequest = PageRequest.of(0, 10,Sort.Direction.DESC,"userNo");
+//		
+//		Page<Member> page = memberRepository.findByUserNoGreaterThan(0L,pageRequest);
+//		
+//		int totalPages = page.getTotalPages();
+//		
+//		System.out.println(page);
+//		System.out.println("totalPages:"+totalPages);
+//		
+//		Pageable pageable = page.getPageable();
+//		
+//		int pageNumber = pageable.getPageNumber();
+//		int pageSize = pageable.getPageSize();
+//	
+//		System.out.println(pageable);
+//		System.out.println("pageNumber"+pageNumber);
+//		System.out.println("pageSize"+pageSize);
+//		
+//		List<Member> memberList = page.getContent();
+//		for(Member member : memberList) {
+//			System.out.println(member);
+//		}
+//	}
 	
+	
+//	@Test
+//	public void testList03() {
+//		List<Member> memberList = memberRepository.findByUserIdAndfindByPassword("user7", "pw7");
+//		for(Member member : memberList) {
+//			System.out.println(member);
+//		}
+//	
+//	}
+//	@Test
+//	public void testModify() {
+//		Optional<Member> memberOptional = memberRepository.findById(2L);
+//		
+//		if(memberOptional.isPresent()) {
+//			Member member = memberOptional.get();
+//		member.setUserName("alexsanedress");
+//		memberRepository.save(member);
+//		}
+//	}
 	
 	
 	
@@ -131,5 +146,52 @@ public class MemberTests {
 //	
 	
 
+	@Test
+	public void JPQLtest01() {
+		List<Member> memberList = memberRepository.getList01("user3");
+		
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
+	}
+//	
+	
+	@Test
+	public void JPQLtest02() {
+		List<Member> memberList = memberRepository.getList02("pw8");
+		for(Member m :memberList) {
+			System.out.println(m);
+		}
+		
+	}
+	
+	@Test
+	public void JPQLtest03() {
+		List<Member> memberList = memberRepository.getList03("min5");
+		for(Member m:memberList) {
+			System.out.println(m);
+		}
+	}
+	
+	@Test
+	public void JPQLtest04() {
+		Pageable pageRequest= PageRequest.of(0, 10,Sort.Direction.DESC,"userNo");
+		
+		List<Member> memberList=memberRepository.getList04(pageRequest);
+		
+		for(Member m : memberList) {
+			System.out.println(m);
+		}
+	}
+	
+	@Transactional
+	@Test
+	public void JPQLtest05() {
+		String userId="user1";
+		String newuserName = "roasd";
+		int count = memberRepository.updateMemberNameById(userId, newuserName);
+		System.out.println("count"+count);
+	}
+	
 	
 }
