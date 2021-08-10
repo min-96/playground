@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -26,7 +27,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@Table(name="board")
+//@Table(name="board")
 //@NoArgsConstructor //인자가 없는 기본 생성자를 생성
 //@AllArgsConstructor //모든 인자로 갖는 생성자 생성
 //@RequiredArgsConstructor //nonnull이 적용된 필드값이나 final로 선언된 필드값만 인자로 받는 생성자 생성
@@ -38,20 +39,21 @@ public class Board {
 	//기본키를 이용해 데이터베이스에 위임
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="board_no")
+	//@Column(name="board_no")
 	private Long boardNo;
 	//@NonNull
 	//@NotBlank
-	@Column(name="title")
+	//@Column(name="title")
 	private String title;
 	//@NonNull
-	@Column(name="content")
+	//@Column(name="content")
+	@Lob
 	private String content;
 	
-	@Column(name="writer")
+	//@Column(name="writer")
 	private String writer;
 	
-	@Column(name="reg_date")
+	//@Column(name="reg_date")
 	//@CreationTimestamp
 	private LocalDateTime regDate;
 	

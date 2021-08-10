@@ -7,7 +7,11 @@ import java.util.List;
 //import org.hdcd.dao.BoardDao;
 import org.hdcd.domain.Board;
 import org.hdcd.repository.BoardRepository;
+import org.hdcd.vo.PageRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -64,6 +68,18 @@ public class BoardServiceImpl implements BoardService {
 		boardEntity.setContent(board.getContent());
 		
 		//repository.modify(board);
+	}
+
+	@Override
+	public Page<Board> list(PageRequestVO pageRequestVO) {
+		int pageNumber =pageRequestVO.getPage()-1;
+		
+		int sizePerPage = pageRequestVO.getSizePerPage();
+		
+		Pageable pageRequest = PageRequest.of(pageNumber,sizePerPage,Sort.Direction.DESC,"boardNo");
+		Page<Board> page = repository.findAll(pageRequest);
+		
+		return page;
 	}
 
 }

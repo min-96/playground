@@ -3,18 +3,23 @@ package org.hdcd.controller;
 import java.time.LocalDateTime;
 
 import org.hdcd.domain.Board;
+import org.hdcd.dto.PaginationDTO;
 import org.hdcd.service.BoardService;
+import org.hdcd.vo.PageRequestVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,17 +48,22 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register")
-	public String register(Board board,Model model) throws Exception {
+	public String register(Board board,Model model,RedirectAttributes rttr) throws Exception {
 		board.setRegDate(LocalDateTime.now());
 		bservice.register(board); // set을 했으니 게시판을 넘김
-		model.addAttribute("msg","등록이 완료되었습니다");
 		
-		return "board/sucess";
+		rttr.addFlashAttribute("msg", "등록이 완료됨");
+		//model.addAttribute("msg","등록이 완료되었습니다");
+		
+		return "redirect:/board/list";
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) throws Exception {
-		model.addAttribute("list",bservice.list());
+	public void list(@ModelAttribute("pgrq")PageRequestVO pageRequestVO,Model model) throws Exception {
+		Page<Board> page = bservice.list(pageRequestVO);
+		
+		model.addAttribute("pgntn", new PaginationDTO<Board>(page));
+	//	model.addAttribute("list",bservice.list());
 		
 	}
 	

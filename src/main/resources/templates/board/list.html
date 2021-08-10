@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>BOARD</title>
@@ -20,7 +20,7 @@
 	<a th:href="@{/board/get?modify}">Modify</a> -->
 	
 	<a href = "register.html" th:href="@{register}">New</a>
-	<table border ="1">
+	<table border ="1" th:with="boardList=${pgntn.page.content}">
 	<tr>
 	<th align="center" width ="80">No</th>
 	<th align="center" width ="320">Title</th>
@@ -28,11 +28,11 @@
 	<th align ="center" width = "180">Regdate</th>
 	</tr>
 	
-	<tr th:if="${#lists.isEmpty(list)}">
+	<tr th:if="${#lists.isEmpty(boardList)}">
 	<td colspan="4"> List is empty</td>
 	</tr>
 	
-	<tr th:each="board:${list}">
+	<tr th:each="board:${boardList}">
 	<td align ="center" th:text="${board.boardNo}">${board.boardNo}</td>
 	<td align ="left"><a href="read.html" th:href="@{|read?boardNo=${board.boardNo}|}"
 	th:text="${board.title}">${board.title}</a></td>
@@ -43,6 +43,40 @@
 	</tr>
 	
 	</table>
+	
+	<div>
+	<th:block th:if = "${pgntn.prevPageable}">
+	<a
+	th:href="@{|board/list${pgntn.makeQuery(pgntn.prevPageable.pageNumber+1)}|}">Prev
+	[[${pgntn.prevPageable.pageNumber}+1]]</a>
+	</th:block>
+	
+	<th:block th:each="p:${pgntn.pageableList}">
+	<a href="list.html" th:href="@{|board/list${pgntn.makeQuery(p.pageNumber+1)}|}">
+	[[${p.pageNumber}+1]]
+	</a>
+	</th:block>
+	
+	<th:block th:if="${pgntn.nextPageable}">
+	<a href="list.html" th:href="@{|board/list${pgntn.makeQuery(pgntn.nextPageable.pageNumber+1)}|}">
+	[[${pgntn.nextPageable.pageNumber}+1]]
+	</a>
+	</th:block>	
+	
+	</div>
+	
+	
+	
+
+<script  th:inline="javascript">
+	/*<![CDATA[*/
+	var result = "[[${msg}]]";
+	if(result){
+        alert(result);
+        }
+	/*]]>*/
+</script>
+	
 	
 </body>
 </html>
