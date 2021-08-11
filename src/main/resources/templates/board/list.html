@@ -34,7 +34,7 @@
 	
 	<tr th:each="board:${boardList}">
 	<td align ="center" th:text="${board.boardNo}">${board.boardNo}</td>
-	<td align ="left"><a href="read.html" th:href="@{|read?boardNo=${board.boardNo}|}"
+	<td align ="left"><a href="read.html" th:href="@{|read${pgrq.toUriString()}&boardNo=${board.boardNo}|}"
 	th:text="${board.title}">${board.title}</a></td>
 	
 	<td align= "right" th:text="${board.writer}">${board.writer}</td>
@@ -44,31 +44,40 @@
 	
 	</table>
 	
+	
+	<input type="hidden" name ="page" th:value="${pgrq.page}"/>
+	<input type="hidden" name="sizePerPage" th:value ="${pgrq.sizePerPage}"/>
+
+<!-- 	페이징 네비게이션-->	
 	<div>
 	<th:block th:if = "${pgntn.prevPageable}">
 	<a
-	th:href="@{|board/list${pgntn.makeQuery(pgntn.prevPageable.pageNumber+1)}|}">Prev
+	th:href="@{|list${pgrq.toUriStringByPage(pgntn.prevPageable.pageNumber+1)}|}">Prev
 	[[${pgntn.prevPageable.pageNumber}+1]]</a>
 	</th:block>
 	
 	<th:block th:each="p:${pgntn.pageableList}">
-	<a href="list.html" th:href="@{|board/list${pgntn.makeQuery(p.pageNumber+1)}|}">
+	<a href="list.html" th:href="@{|list${pgrq.toUriStringByPage(p.pageNumber+1)}|}">
 	[[${p.pageNumber}+1]]
 	</a>
 	</th:block>
 	
-	<th:block th:if="${pgntn.nextPageable}">
-	<a href="list.html" th:href="@{|board/list${pgntn.makeQuery(pgntn.nextPageable.pageNumber+1)}|}">
+ 	<th:block th:if="${pgntn.nextPageable}">
+	<a href="list.html" th:href="@{|list${pgrq.toUriStringByPage(pgntn.nextPageable.pageNumber+1)}|}">
 	[[${pgntn.nextPageable.pageNumber}+1]]
 	</a>
 	</th:block>	
+	
+	
+	
+
 	
 	</div>
 	
 	
 	
 
-<script  th:inline="javascript">
+<!-- <script  th:inline="javascript">
 	/*<![CDATA[*/
 	var result = "[[${msg}]]";
 	if(result){
@@ -76,7 +85,7 @@
         }
 	/*]]>*/
 </script>
-	
+	 -->
 	
 </body>
 </html>

@@ -75,7 +75,7 @@ public class BoardServiceImpl implements BoardService {
 		int pageNumber =pageRequestVO.getPage()-1;
 		
 		int sizePerPage = pageRequestVO.getSizePerPage();
-		
+		//정렬방향과 속성이 적용된 pageRequest를 생성한다
 		Pageable pageRequest = PageRequest.of(pageNumber,sizePerPage,Sort.Direction.DESC,"boardNo");
 		Page<Board> page = repository.findAll(pageRequest);
 		

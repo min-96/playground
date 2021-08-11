@@ -13,7 +13,7 @@ public class PageRequestVO {
 		this.sizePerPage=10;
 	}
 	
-	public void setPage(int Page) {
+	public void setPage(int page) {
 		if(page<=0) {
 			this.page=1;
 			return;
@@ -44,14 +44,19 @@ public class PageRequestVO {
 		return(this.page-1)*sizePerPage;
 	}
 	
-	public String toUriString() {
+	public String toUriStringByPage(int page) {
+		//Path나 query에 해당하는 문자열들을 추가해서 원하는 URI를 생성할 때 사용한다.
 		UriComponents uriComponents= UriComponentsBuilder.newInstance()
-				.queryParam("page", this.page)
+				.queryParam("page", page)
 				.queryParam("size", this.sizePerPage)
 				.build();
 		
 		return uriComponents.toUriString();
 		
+	}
+	
+	public String toUriString() {
+		return toUriStringByPage(this.page);
 	}
 	
 }

@@ -29,9 +29,12 @@
 
 </table>
 
-<a href="modify.html" th:href="@{|modify?boardNo=${board.boardNo}|}">Modify</a>
-<input type="submit" value="삭제" />
-<a href="list.html" th:href="@{list}">List</a>
+<input type="hidden" name="page" th:value="${pgrq.page}"/>
+<input type="hidden" name="sizePerPage" th:value="${pgrq.sizePerPage}"/>
+
+<a href="modify.html" th:href="@{|modify${pgrq.toUriString()}&boardNo=${board.boardNo}|}">Modify</a>
+<a href="list.html" th:href="@{|list${pgrq.toUriString()}}">List</a>
+<button type="submit" value="삭제">remove</button>
 
 </form>
 

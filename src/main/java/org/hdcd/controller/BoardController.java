@@ -59,8 +59,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
+	//객체매핑@ModelAttribute 
 	public void list(@ModelAttribute("pgrq")PageRequestVO pageRequestVO,Model model) throws Exception {
 		Page<Board> page = bservice.list(pageRequestVO);
+		
+		log.info("pageable!!"+page.getPageable());
+		log.info("totalPages!!"+page.getTotalPages());
 		
 		model.addAttribute("pgntn", new PaginationDTO<Board>(page));
 	//	model.addAttribute("list",bservice.list());
@@ -68,30 +72,39 @@ public class BoardController {
 	}
 	
 	@GetMapping("/read")
-	public void read(Model model,Long boardNo) throws Exception {
+	public void read(Model model,Long boardNo,@ModelAttribute("pgrq")PageRequestVO pageRequestVO) throws Exception {
 		model.addAttribute(bservice.read(boardNo));
 	}
 	
 	@PostMapping("/remove")
-	public String remove(Model model,Long boardNo) throws Exception {
+	public String remove(Long boardNo,RedirectAttributes rttr,PageRequestVO pageRequestVO) throws Exception {
 		bservice.remove(boardNo);
-		model.addAttribute("msg", "삭제가 완료되었습니다");
-		return "board/sucess";
+		rttr.addAttribute("page",pageRequestVO.getPage());
+		rttr.addAttribute("sizePerPage",pageRequestVO.getSizePerPage());
+		//model.addAttribute("msg", "삭제가 완료되었습니다");
+		rttr.addFlashAttribute("msg", "삭제가 완료되었습니다");
+		
+		return "redirect:/board/list";
 		
 	}
 	@GetMapping("/modify")
-	public void modify(Model model,Long boardNo) throws Exception {
+	public void modify(Model model,Long boardNo,@ModelAttribute("pgrq")PageRequestVO pageRequestVO) throws Exception {
 		model.addAttribute(bservice.read(boardNo));
 	}
 	
 	@PostMapping("/modify")
-	public String modify(Board board,Model model) throws Exception {
-		log.info("boardNo"+board.getBoardNo());
-		log.info(board.getWriter());
+	public void modify(Board board,Long boardNo,Model model,@ModelAttribute("pgrq")PageRequestVO pageRequestVO) throws Exception {
+		//log.info("boardNo"+board.getBoardNo());
+		//log.info(board.getWriter());
+		
 		
 		bservice.modify(board);
-		model.addAttribute("msg", "수정이 완려되았습니다");
-		return "board/sucess";
+		//model.addAttribute("msg", "수정이 완려되았습니다");
+		//rttr.addAttribute(pageRequestVO);
+		//rttr.addAttribute("msg", "수정이 완료되었씁니다");
+		
+		model.addAttribute(bservice.read(boardNo));
+	//	return "redirect:/board/list";
 	}
 	
 	
