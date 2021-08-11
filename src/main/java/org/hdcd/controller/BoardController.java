@@ -1,8 +1,11 @@
 package org.hdcd.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hdcd.domain.Board;
+import org.hdcd.domain.CodeLabelValue;
 import org.hdcd.dto.PaginationDTO;
 import org.hdcd.service.BoardService;
 import org.hdcd.vo.PageRequestVO;
@@ -47,6 +50,7 @@ public class BoardController {
 	
 	}
 	
+	
 	@PostMapping("/register")
 	public String register(Board board,Model model,RedirectAttributes rttr) throws Exception {
 		board.setRegDate(LocalDateTime.now());
@@ -61,13 +65,29 @@ public class BoardController {
 	@GetMapping("/list")
 	//객체매핑@ModelAttribute 
 	public void list(@ModelAttribute("pgrq")PageRequestVO pageRequestVO,Model model) throws Exception {
-		Page<Board> page = bservice.list(pageRequestVO);
+	//페이징
+		Page<Board> page = bservice.Plist(pageRequestVO);
 		
 		log.info("pageable!!"+page.getPageable());
 		log.info("totalPages!!"+page.getTotalPages());
 		
 		model.addAttribute("pgntn", new PaginationDTO<Board>(page));
 	//	model.addAttribute("list",bservice.list());
+		
+		//검색유형의 코드명과 코드값 정의 
+		model.addAttribute("list",bservice.list(pageRequestVO));
+		
+		List<CodeLabelValue> searchTypeCodeValueList=new ArrayList<>();
+		
+		
+		searchTypeCodeValueList.add(new CodeLabelValue("n","---"));
+		searchTypeCodeValueList.add(new CodeLabelValue("t", "Title"));
+		searchTypeCodeValueList.add(new CodeLabelValue("c", "Content"));
+		searchTypeCodeValueList.add(new CodeLabelValue("w", "Writer"));
+		searchTypeCodeValueList.add(new CodeLabelValue("tc", "Title OR Content"));
+		searchTypeCodeValueList.add(new CodeLabelValue("twc", "Title OR Content OR Writer"));
+		
+		model.addAttribute("search",searchTypeCodeValueList);
 		
 	}
 	

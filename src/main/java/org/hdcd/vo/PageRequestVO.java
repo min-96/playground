@@ -7,8 +7,12 @@ public class PageRequestVO {
 	
 	private int page;
 	private int sizePerPage;
+	//검색유형과 검색어를 필드로 선언
+	private String searchType;
+	private String keyword;
 
-	public PageRequestVO() {
+	
+	PageRequestVO() {
 		this.page=1;
 		this.sizePerPage=10;
 	}
@@ -58,5 +62,24 @@ public class PageRequestVO {
 	public String toUriString() {
 		return toUriStringByPage(this.page);
 	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	
+
 	
 }

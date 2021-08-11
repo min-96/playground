@@ -19,6 +19,25 @@
 	
 	<a th:href="@{/board/get?modify}">Modify</a> -->
 	
+<!-- 	검색 폼 -->
+	<form id="pgrq" action="list.html" th:action="@{list}"
+	th:object="${pgrq}" method="get">
+	<select th:field="*{searchType}">
+	<option th:each="element:${search}" th:value="${element.value}" 
+	th:label="${element.label}">제목</option>
+	</select>
+	
+	<input type="text" name="keyword" th:field="*{keyword}"/>
+	<button type="submit">검색</button>
+	
+	</form>
+	
+	
+	
+	
+	
+	
+	
 	<a href = "register.html" th:href="@{register}">New</a>
 	<table border ="1" th:with="boardList=${pgntn.page.content}">
 	<tr>
@@ -77,7 +96,7 @@
 	
 	
 
-<!-- <script  th:inline="javascript">
+ <script  th:inline="javascript">
 	/*<![CDATA[*/
 	var result = "[[${msg}]]";
 	if(result){
@@ -85,7 +104,7 @@
         }
 	/*]]>*/
 </script>
-	 -->
+	
 	
 </body>
 </html>

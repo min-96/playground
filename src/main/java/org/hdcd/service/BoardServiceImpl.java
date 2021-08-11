@@ -39,9 +39,37 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	@Transactional(readOnly=true) // 읽기전용
-	public List<Board> list() throws Exception {
-		return repository.findAll(Sort.by(Direction.DESC, "boardNo"));
-		
+	public List<Board> list(PageRequestVO pageRequestVO) throws Exception {
+		//return repository.findAll(Sort.by(Direction.DESC, "boardNo"));
+		//검색
+				String searchType=pageRequestVO.getSearchType();
+				String keyword = pageRequestVO.getKeyword();
+				
+				List<Board> list = null;
+				if(searchType!=null &&searchType.length()>0) {
+					if(searchType.equals("t")) {
+					list=repository.findByTitleContainingOrderByBoardNoDesc(keyword);
+				}
+					else if(searchType.equals("c")) {
+						list=repository.findByContentContainingOrderByBoardNoDesc(keyword);			
+					}
+					else if(searchType.equals("w")) {
+						list=repository.findByWriterContainingOrderByBoardNoDesc(keyword);
+					}
+					else if(searchType.equals("tc")) {
+						list= repository.findByTitleContainingOrContentContainingOrderByBoardNoDesc(keyword, keyword);
+					}
+					else if(searchType.equals("twc")) {
+						list=repository.findByAllContainingOrderByDesc(keyword, keyword, keyword);
+					}
+					else {
+						list= repository.findByBoardNoGreaterThanOrderByBoardNoDesc(0L);
+					}
+				}
+				else {
+					list=repository.findByBoardNoGreaterThanOrderByBoardNoDesc(0L);
+				}
+				return list;
 		//return dao.list();
 	}
 
@@ -71,13 +99,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Page<Board> list(PageRequestVO pageRequestVO) {
+	public Page<Board> Plist(PageRequestVO pageRequestVO) {
 		int pageNumber =pageRequestVO.getPage()-1;
 		
 		int sizePerPage = pageRequestVO.getSizePerPage();
 		//정렬방향과 속성이 적용된 pageRequest를 생성한다
 		Pageable pageRequest = PageRequest.of(pageNumber,sizePerPage,Sort.Direction.DESC,"boardNo");
 		Page<Board> page = repository.findAll(pageRequest);
+		
+		
 		
 		return page;
 	}
