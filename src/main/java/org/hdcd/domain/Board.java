@@ -55,6 +55,7 @@ public class Board {
 	
 	//@Column(name="reg_date")
 	//@CreationTimestamp
+	@CreationTimestamp
 	private LocalDateTime regDate;
 	
 
