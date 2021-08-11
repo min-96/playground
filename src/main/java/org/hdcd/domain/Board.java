@@ -58,9 +58,7 @@ public class Board {
 	//@CreationTimestamp
 	@CreationTimestamp
 	private LocalDateTime regDate;
-	
 	@UpdateTimestamp
-	private LocalDateTime upDate;
-	
+	private LocalDateTime upDate; 
 
 }

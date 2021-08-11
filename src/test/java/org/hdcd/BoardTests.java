@@ -1,17 +1,19 @@
-//package org.hdcd;
-//
-//import org.hdcd.domain.Board;
-//import org.hdcd.repository.BoardRepository;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//@SpringBootTest
-//public class BoardTests {
-//
-//	@Autowired
-//	BoardRepository boardRepository;
-//	
+package org.hdcd;
+
+import java.util.List;
+
+import org.hdcd.domain.Board;
+import org.hdcd.repository.BoardRepository;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class BoardTests {
+
+	@Autowired
+	BoardRepository boardRepository;
+	
 //	@Test
 //	public void testRegister() {
 //		for(int i=0; i<30; i++) {
@@ -24,9 +26,20 @@
 //			boardRepository.save(board);
 //		}
 //	}
-//	
-////	@Test
-////	public void testRemove() {
-////		boardRepository.deleteAll();
-////	}
-//}
+	
+//	@Test
+//	public void testRemove() {
+//		boardRepository.deleteAll();
+//	}
+	@Test
+	public void testJPQL() {
+		String keyword="내용";
+		List<Board> boardList =boardRepository.findByContentContainingOrderByBoardNoDesc(keyword);
+		//List<Board> boardList = boardRepository.findAll();
+		for(Board b: boardList) {
+			System.out.println(b);
+		}
+		
+	}
+
+}

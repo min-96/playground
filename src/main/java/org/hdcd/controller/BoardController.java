@@ -74,8 +74,12 @@ public class BoardController {
 		model.addAttribute("pgntn", new PaginationDTO<Board>(page));
 	//	model.addAttribute("list",bservice.list());
 		
-		//검색유형의 코드명과 코드값 정의 
 		model.addAttribute("list",bservice.list(pageRequestVO));
+		//검색유형의 코드명과 코드값 정의 
+		log.info("키워드"+pageRequestVO.getKeyword());
+		log.info("타입"+pageRequestVO.getSearchType());
+		
+		
 		
 		List<CodeLabelValue> searchTypeCodeValueList=new ArrayList<>();
 		
@@ -88,6 +92,8 @@ public class BoardController {
 		searchTypeCodeValueList.add(new CodeLabelValue("twc", "Title OR Content OR Writer"));
 		
 		model.addAttribute("search",searchTypeCodeValueList);
+		
+		
 		
 	}
 	

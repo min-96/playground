@@ -20,7 +20,7 @@
 	<a th:href="@{/board/get?modify}">Modify</a> -->
 	
 <!-- 	검색 폼 -->
-	<form id="pgrq" action="list.html" th:action="@{list}"
+	<form action="list.html" th:action="@{list}"
 	th:object="${pgrq}" method="get">
 	<select th:field="*{searchType}">
 	<option th:each="element:${search}" th:value="${element.value}" 
@@ -51,6 +51,7 @@
 	<td colspan="4"> List is empty</td>
 	</tr>
 	
+
 	<tr th:each="board:${boardList}">
 	<td align ="center" th:text="${board.boardNo}">${board.boardNo}</td>
 	<td align ="left"><a href="read.html" th:href="@{|read${pgrq.toUriString()}&boardNo=${board.boardNo}|}"
