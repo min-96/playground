@@ -63,11 +63,11 @@ public class BoardServiceImpl implements BoardService {
 						list=repository.findByAllContainingOrderByDesc(keyword, keyword, keyword);
 					}
 					else {
-						list= repository.findByBoardNoGreaterThanOrderByBoardNoDesc(0L);
+						list= repository.listAll();
 					}
 				}
 				else {
-					list=repository.findByBoardNoGreaterThanOrderByBoardNoDesc(0L);
+					list=repository.listAll();
 				}
 				return list;
 		//return dao.list();
