@@ -53,14 +53,26 @@ public class PageRequestVO {
 		UriComponents uriComponents= UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
 				.queryParam("size", this.sizePerPage)
+				.queryParam("searchType", this.searchType)
+				.queryParam("keyword", this.keyword)
 				.build();
 		
 		return uriComponents.toUriString();
 		
 	}
 	
+	
 	public String toUriString() {
 		return toUriStringByPage(this.page);
+	}
+	
+	
+	public String toUringStringForSearchAction(int page) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.build();
+		return uriComponents.toUriString();
+		
 	}
 
 	public String getSearchType() {

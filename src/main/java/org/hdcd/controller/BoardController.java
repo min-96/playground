@@ -74,7 +74,7 @@ public class BoardController {
 		model.addAttribute("pgntn", new PaginationDTO<Board>(page));
 	//	model.addAttribute("list",bservice.list());
 		
-		model.addAttribute("list",bservice.list(pageRequestVO));
+	//	model.addAttribute("list",bservice.list(pageRequestVO));
 		//검색유형의 코드명과 코드값 정의 
 		log.info("키워드"+pageRequestVO.getKeyword());
 		log.info("타입"+pageRequestVO.getSearchType());
