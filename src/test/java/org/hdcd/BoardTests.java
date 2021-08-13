@@ -31,15 +31,15 @@ public class BoardTests {
 //	public void testRemove() {
 //		boardRepository.deleteAll();
 //	}
-	@Test
-	public void testJPQL() {
-		String keyword="내용";
-		List<Board> boardList =boardRepository.findByContentContainingOrderByBoardNoDesc(keyword);
-		//List<Board> boardList = boardRepository.findAll();
-		for(Board b: boardList) {
-			System.out.println(b);
-		}
-		
-	}
+//	@Test
+//	public void testJPQL() {
+//		String keyword="내용";
+//		List<Board> boardList =boardRepository.findByContentContainingOrderByBoardNoDesc(keyword);
+//		//List<Board> boardList = boardRepository.findAll();
+//		for(Board b: boardList) {
+//			System.out.println(b);
+//		}
+//		
+//	}
 
 }

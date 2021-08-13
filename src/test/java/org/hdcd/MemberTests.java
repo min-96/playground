@@ -216,7 +216,7 @@
 ////			memberRepository.save(member);
 ////		}
 ////	}
-//	
+//	//// Querydsl--------------------------------------------
 //	@Test
 //	public void testList01() {
 //		//쿼리의 조건 설정인 where뒤의 조건을 생성해주는 것이라고 생각하면 된다.
