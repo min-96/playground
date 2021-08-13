@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long>,QuerydslPredicateExecutor<Board>{
-	
+	//사용자 인터페이스 
+	//CustomerBoardRepository
 	//검색 쿼리 JPA
 //	@Query("SELECT b FROM Board b WHERE b.boardNo>0 ORDER BY b.boardNo desc")
 //	public List<Board> listAll();
