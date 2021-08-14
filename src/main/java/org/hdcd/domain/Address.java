@@ -22,4 +22,5 @@ public class Address {
 	private String postCode;
 	//@NotBlank
 	private String location;
+	//test
 }
