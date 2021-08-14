@@ -6,6 +6,7 @@ package org.hdcd.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,17 +45,24 @@ public class Member {
 	private Long userNo;
 	
 	//@NotBlank //입력값 검증 규칙을 지정한다
-	@Column(name="uid", length=50, nullable=false)
+	//@Column(name="uid", length=50, nullable=false)
 	private String userId;
-	@Column(name="upw", length=100, nullable=false)
+	//@Column(name="upw", length=100, nullable=false)
 	private String password;
+	
+	@Embedded
+	private Address address;
 	//@NotBlank
 	//@Size(max=3) // 여러개의 입력값 검증 규칙을 지정할수있다
-	@Column(name="uname", length=100,nullable=false)
+	//@Column(name="uname", length=100,nullable=false)
 	private String userName;
+	
+	
 	//enum 이름을 db에 저장 // 문자열로
-	@Enumerated(EnumType.STRING)
-	private Gender gender;
+	//@Enumerated(EnumType.STRING)
+	//private Gender gender;
+	
+	
 	//private int coin;
 	//@Future
 	//@Past // 과거날짜인지를 검사
