@@ -318,7 +318,7 @@ public class MemberTests {
 		if(memberOptional.isPresent()) {
 			Member member = memberOptional.get();
 			Address address = new Address("758-11","Daejeon");
-			member.setAddress(address);
+			member.setAddress(address);//
 			memberRepository.save(member);
 		}
 		
