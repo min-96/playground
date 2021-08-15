@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.hdcd.constant.Gender;
 import org.hdcd.domain.Address;
+import org.hdcd.domain.Card;
 import org.hdcd.domain.Member;
 import org.hdcd.domain.QMember;
 import org.hdcd.repository.MemberRepository;
@@ -17,7 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.BooleanBuilder;
 
@@ -282,7 +284,7 @@ public class MemberTests {
 //			System.out.println(m);
 //		}
 //	}	
-
+//
 //	@Test
 //	public void testRegister() {
 //		Member member1 = new Member();
@@ -296,31 +298,92 @@ public class MemberTests {
 //		memberRepository.save(member2);
 //	}
 
+//	
+//	@Test
+//	public void testRegisterWithAddress() {
+//		//Member member = new Member();
+//		Optional<Member> memberOtional = memberRepository.findById(1L);
+//		
+//		if(memberOtional.isPresent()) {
+//			Member member = memberOtional.get();
+//			Address address = new Address("130-151","seoul");
+//			member.setAddress(address);
+//			memberRepository.save(member);
+//		}
+//		
+//	}
+//	
+//	@Test
+//	public void testRegisterWithAddress1() {
+//		Optional<Member> memberOptional = memberRepository.findById(2L);
+//		
+//		if(memberOptional.isPresent()) {
+//			Member member = memberOptional.get();
+//			Address address = new Address("758-11","Daejeon");
+//			member.setAddress(address);//
+//			memberRepository.save(member);
+//		}
+//		
+//	}
+//	@Test
+//	public void testResisterCollection() {
+//		Member member = new Member();
+//		member.setUserId("ggnyong");
+//		member.setPassword("1234");
+//		
+//		List<Card> cardList = new ArrayList<>();
+//		//Card card = new Card();
+//		cardList.add(new Card("262-124-544","202301"));
+//		cardList.add(new Card("356-124-45645","202501"));
+//		member.setCardList(cardList);
+//		memberRepository.save(member);
+//
+//
+//		
+//	}
+//	
 	
-	@Test
-	public void testRegisterWithAddress() {
-		//Member member = new Member();
-		Optional<Member> memberOtional = memberRepository.findById(1L);
-		
-		if(memberOtional.isPresent()) {
-			Member member = memberOtional.get();
-			Address address = new Address("130-151","seoul");
-			member.setAddress(address);
-			memberRepository.save(member);
-		}
-		
-	}
+	//findAll 메서드로 회원정보를 출력할때 toString() 과정에서 카드정보를
+	//가져와야되는데 @elementCoolection 은 기본적으로 fetch 속성이 fetchType.Lazy라서 에러발생
+	//에러가 발생하지 않게 @Teasaction으로 하나의 트랜잭션의 범위로 지정해야한다
+//	@Transactional
+//	@Test
+//	public void testList() {
+//		Iterable<Member> members = memberRepository.findAll();
+//		
+//		for(Member m : members) {
+//			System.out.println(m);
+//			List<Card> cardList = m.getCardList();
+//			for(Card card : cardList) {
+//				System.out.println(card);
+//			}
+//		}
+//	}
+//	@Transactional
+//	@Test
+//	public void testReadAtTransctional() {
+//		Optional<Member> memberOptional = memberRepository.findById(1L);
+//		
+//		if(memberOptional.isPresent()) {
+//			Member member = memberOptional.get();
+//			System.out.println(member);
+//		}
+//	}
 	
-	@Test
-	public void testRegisterWithAddress1() {
-		Optional<Member> memberOptional = memberRepository.findById(2L);
-		
-		if(memberOptional.isPresent()) {
-			Member member = memberOptional.get();
-			Address address = new Address("758-11","Daejeon");
-			member.setAddress(address);//
-			memberRepository.save(member);
-		}
-		
-	}
+//	@Transactional
+//	@Test
+//	public void testModifyAtTranscational() {
+//		Optional<Member> memberOptional = memberRepository.findById(1L);
+//		
+//		if(memberOptional.isPresent()) {
+//			Member member =memberOptional.get();
+//		Card card = member.getCard(0);
+//		card.setValidMonth("202804");
+//		memberRepository.save(member);
+//		
+//			
+//			
+//		}
+//	}
+
 }

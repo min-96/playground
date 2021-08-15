@@ -4,8 +4,11 @@ package org.hdcd.domain;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +16,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OrderBy;
+import javax.persistence.OrderColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -50,8 +56,12 @@ public class Member {
 	//@Column(name="upw", length=100, nullable=false)
 	private String password;
 	
-	@Embedded
-	private Address address;
+	
+	
+	//@Embedded
+	//private Address address;
+	
+	
 	//@NotBlank
 	//@Size(max=3) // 여러개의 입력값 검증 규칙을 지정할수있다
 	//@Column(name="uname", length=100,nullable=false)
@@ -96,7 +106,23 @@ public class Member {
 //	private Address address;
 //	//자바빈즈 컬렉션의 입력값 검증을 지정
 //	@Valid
-//	private List<Card> cardList;
+	
+	//컬렉션을 테이블로 생성하여 1:n 관계를 다룬다
+	
+	@ElementCollection
+	@CollectionTable(
+	name="member_card",
+	joinColumns =  @JoinColumn(name="user_no"))
+	@OrderBy("user_no desc")
+	private List<Card> cardList;
+
+
+
+
+	public Card getCard(int i) {
+		// TODO Auto-generated method stub
+		return cardList.get(i);
+	}
 	
 //	private String[] carArray;
 //	private List<String> carList;
