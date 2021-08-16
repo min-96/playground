@@ -22,7 +22,7 @@ import lombok.ToString;
 public class CodeDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long CodeDetailNo;
+	private Long codeDetailNo;
 	
 	private String groupCode;
 	private String codeValue;
