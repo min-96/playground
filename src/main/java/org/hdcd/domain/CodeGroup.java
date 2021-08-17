@@ -7,10 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,10 +44,12 @@ public class CodeGroup {
 	
 	//코드그룹은 여러 코드상세를 가질 수 있다 
 	//코드그룹은 코드상세에 접근가능하지만 코드상세는 코드그룹에 접근 불가능
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="gourp_code")
-	private List<CodeDetail> codeDetails;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name="groupCode")
+//	private List<CodeDetail> codeDetails;
 
 
+//	
+	
 
 }

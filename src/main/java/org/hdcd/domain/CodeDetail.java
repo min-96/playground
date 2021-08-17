@@ -2,10 +2,13 @@ package org.hdcd.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -33,4 +36,8 @@ public class CodeDetail {
 	private LocalDateTime regDate;
 	@UpdateTimestamp
 	private LocalDateTime upDate;
+	
+	@ManyToOne
+	@JoinColumn(name="groupCode",insertable=false, updatable=false)
+	private CodeGroup codeGroup;
 }
