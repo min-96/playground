@@ -20,14 +20,14 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "codeGroup")
 @Entity
 public class CodeDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long codeDetailNo;
 	
-	private String groupCode;
+	//private String groupCode;
 	private String codeValue;
 	private String codeName;
 	private int sortSeq;
@@ -36,8 +36,9 @@ public class CodeDetail {
 	private LocalDateTime regDate;
 	@UpdateTimestamp
 	private LocalDateTime upDate;
-	
+
+	//다대일 단방향
 	@ManyToOne
-	@JoinColumn(name="groupCode",insertable=false, updatable=false)
+	@JoinColumn(name="group_code")
 	private CodeGroup codeGroup;
 }

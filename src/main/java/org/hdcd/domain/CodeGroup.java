@@ -3,13 +3,9 @@ package org.hdcd.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,6 +16,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+//@ToString(exclude = "codeDetails")
 @ToString
 @Entity
 public class CodeGroup {
@@ -44,12 +41,21 @@ public class CodeGroup {
 	
 	//코드그룹은 여러 코드상세를 가질 수 있다 
 	//코드그룹은 코드상세에 접근가능하지만 코드상세는 코드그룹에 접근 불가능
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name="groupCode")
-//	private List<CodeDetail> codeDetails;
+	//mapperBy 속성은 양방향매핑일때 사용하는데 반대쪽 매핑의 필드 이름을 값으로
+	//주면된다.
+	@OneToMany(mappedBy = "codeGroup",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	//@JoinColumn(name="groupCode")
+	private List<CodeDetail> codeDetails;
+	//코드상세는 codeGroup 필드를 통해서 코드그룹에 접근할수있고 반대로
+	//코드그룹은 codeDetail 필드를 통해서 코드상세에 접근할수있다.
 
 
-//	
+	//한번에 양방향 관계를 설정하는 메서드.
+	public void addCodeDetail(CodeDetail codeDetail){
+		codeDetail.setCodeGroup(this);
+		this.codeDetails.add(codeDetail);
+	}
+
 	
 
 }
