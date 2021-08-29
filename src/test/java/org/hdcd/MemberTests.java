@@ -32,6 +32,18 @@ public class MemberTests {
 	MemberRepository memberRepository;
 
 
+	@Test
+	public void testRegister(){
+		Member member1 = new Member();
+		member1.setUserId("jupitar");
+		member1.setPassword("1234");
+		member1.setUserName("minyong");
+		member1.setRegDate(LocalDateTime.now());
+
+		memberRepository.save(member1);
+
+	}
+
 
 //	
 //	@Test

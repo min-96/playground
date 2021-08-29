@@ -7,7 +7,7 @@ import java.util.List;
 
 //import org.hdcd.dao.BoardDao;
 import org.hdcd.domain.Board;
-import org.hdcd.domain.QBoard;
+//import org.hdcd.domain.QBoard;
 import org.hdcd.repository.BoardRepository;
 import org.hdcd.vo.PageRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
