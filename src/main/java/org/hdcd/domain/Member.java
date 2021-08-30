@@ -21,7 +21,9 @@ import lombok.ToString;
 @Setter
 //@NoArgsConstructor
 //@RequiredArgsConstructor
-@ToString(exclude = "items")
+//@ToString(exclude = "items")
+@ToString(exclude = "userItems")
+
 //jpa의 엔티티임을 의미
 @Entity
 @EqualsAndHashCode // 필드명으로 userNo equal과 hascode
@@ -84,16 +86,16 @@ public class Member {
 
 	//회원테이블은 user_no 외래키로 회원상품 테이블과 연관관계를 맺는다.
 	//역방향 엔티티와 매핑할조인컬럼 정보를 지정
-	@ManyToMany
-	@JoinTable(name="user_item",joinColumns = @JoinColumn(name = "user_no"),
-	inverseJoinColumns = @JoinColumn(name = "item_no"))
-	private List<Item> items = new ArrayList<>();
-
-	public void addItem(Item item){
-		items.add(item);
-		item.getMembers().add(this);
-	}
-	
+//	@ManyToMany
+//	@JoinTable(name="user_item",joinColumns = @JoinColumn(name = "user_no"),
+//	inverseJoinColumns = @JoinColumn(name = "item_no"))
+//	private List<Item> items = new ArrayList<>();
+//
+//	public void addItem(Item item){
+//		items.add(item);
+//		item.getMembers().add(this);
+//	}
+//
 //	@Email // 이메일형식인지 검증
 //	private String email;
 //	
@@ -127,6 +129,9 @@ public class Member {
 //	private String[] carArray;
 //	private List<String> carList;
 //	
+	//양방향
+	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+	private List<UserItem> userItems = new ArrayList<>();
 
 
 }
