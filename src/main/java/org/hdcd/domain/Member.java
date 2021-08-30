@@ -6,21 +6,7 @@ package org.hdcd.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.hdcd.constant.Gender;
 import org.hibernate.annotations.CreationTimestamp;
@@ -91,9 +77,14 @@ public class Member {
 	
 	@UpdateTimestamp // update 자동시간
 	private LocalDateTime upDate;
-	
-	
-	
+
+	//일대일 단방향 2
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_no")
+	private MemberDetail memberDetail;
+
+
+
 	
 //	@Email // 이메일형식인지 검증
 //	private String email;

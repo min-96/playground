@@ -299,18 +299,60 @@ public class MemberTests {
 //		}
 //	}	
 //
+	@Test
+	public void testRegister() {
+		Member member1 = new Member();
+		member1.setUserId("jihyen");
+		member1.setPassword("1234");
+		memberRepository.save(member1);
+
+		Member member2 = new Member();
+		member2.setUserId("mm");
+		member2.setPassword("0000");
+		memberRepository.save(member2);
+
+		Member member3 = new Member();
+		member3.setUserId("sdaas");
+		member3.setPassword("12344");
+		memberRepository.save(member3);
+	}
+
+	@Test
+	@Transactional
+	public void testRegisterWithDetailAtTransactional(){
+
+		Long userNo = 1L;
+		Member member1 = new Member();
+		member1.setUserNo(userNo);
+		member1.setUserId("jupiter");
+		member1.setPassword("1234");
+
+		MemberDetail memberDetail = new MemberDetail();
+		memberDetail.setUserNo(userNo);
+		memberDetail.setUserName("Alex");
+		memberDetail.setEmail("ajdcnd131@naver.com");
+		member1.setMemberDetail(memberDetail);
+
+		memberRepository.save(member1);
+
+	}
+
+//	@Transactional
 //	@Test
-//	public void testRegister() {
-//		Member member1 = new Member();
-//		member1.setUserId("jihyen");
-//		member1.setPassword("1234");
-//		memberRepository.save(member1);
-//		
-//		Member member2 = new Member();
-//		member2.setUserId("mm");
-//		member2.setPassword("0000");
-//		memberRepository.save(member2);
+//	public void testRegisterWithDetailAtTransactional(){
+//		Optional<Member> memberOptional= memberRepository.findById(1L);
+//
+//		if(memberOptional.isPresent()){
+//			Member member = memberOptional.get();
+//			MemberDetail memberDetail = new MemberDetail();
+//			memberDetail.setUserName("Alex");
+//			memberDetail.setEmail("ajdcbd1312@namver.com");
+//
+//			memberRepository.save(member);
+//		}
 //	}
+
+
 
 //	
 //	@Test
@@ -400,30 +442,30 @@ public class MemberTests {
 //		}
 //	}
 
-	@Transactional
-	@Test
-	public void testRegisterWithDetailAtTransactional() {
-		Member member1 = new Member();
-		member1.setUserId("jupiter");
-		member1.setPassword("1234");
+//	@Transactional
+//	@Test
+//	public void testRegisterWithDetailAtTransactional() {
+//		Member member1 = new Member();
+//		member1.setUserId("jupiter");
+//		member1.setPassword("1234");
+//
+//		MemberDetail memberDetail = new MemberDetail();
+//		memberDetail.setUserName("Alex");
+//		memberDetail.setEmail("jupiter@naver.com");
+//		memberDetail.setMember(member1);
+//		memberRepository.save(member1);
+//
+//		memberDetailRepository.save(memberDetail);
+//
+//	}
 
-		MemberDetail memberDetail = new MemberDetail();
-		memberDetail.setUserName("Alex");
-		memberDetail.setEmail("jupiter@naver.com");
-		memberDetail.setMember(member1);
-		memberRepository.save(member1);
-
-		memberDetailRepository.save(memberDetail);
-
-	}
-
-
-	@Test
-	public void testRemoveWithDetail(){
-		memberDetailRepository.deleteAll();
-		memberRepository.deleteAll();
-	}
-
+//
+//
+//	@Test
+//	public void testRemoveWithDetail(){
+//		memberDetailRepository.deleteAll();
+//		memberRepository.deleteAll();
+//	}
 
 
 }
