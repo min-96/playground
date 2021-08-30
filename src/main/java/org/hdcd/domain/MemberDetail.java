@@ -28,11 +28,13 @@ public class MemberDetail {
     private LocalDateTime upDate;
 
 
-    //일대일 단방향2
+    //일대일 단방향2정
     @Column(name = "user_no")
     private Long userNo;
     //일대일 단방향
-//    @OneToOne
-//    @JoinColumn(name="user_no")
-//    private Member member;
+
+    //오ㅣ래키
+    @OneToOne
+    @JoinColumn(name="user_no")
+    private Member member;
 }

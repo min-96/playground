@@ -79,7 +79,9 @@ public class Member {
 	private LocalDateTime upDate;
 
 	//일대일 단방향 2
-	@OneToOne(cascade = CascadeType.ALL)
+	// 양방향 일 때 mapperBy 설정
+	//주인이 아닌 Member.memberDetail 에는 mapperdBy=member 속성을 사용해서 주인아님을 설정
+	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	private MemberDetail memberDetail;
 
