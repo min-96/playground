@@ -8,10 +8,8 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.hdcd.constant.Gender;
-import org.hdcd.domain.Address;
-import org.hdcd.domain.Card;
-import org.hdcd.domain.Member;
-import org.hdcd.domain.QMember;
+import org.hdcd.domain.*;
+import org.hdcd.repository.MemberDetailRepository;
 import org.hdcd.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +20,31 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.querydsl.core.BooleanBuilder;
+import org.springframework.test.annotation.Commit;
 
 
-
+@Commit
 @SpringBootTest
 public class MemberTests {
 	
 	@Autowired
 	MemberRepository memberRepository;
 
+	@Autowired
+	MemberDetailRepository memberDetailRepository;
 
-	@Test
-	public void testRegister(){
-		Member member1 = new Member();
-		member1.setUserId("jupitar");
-		member1.setPassword("1234");
-		member1.setUserName("minyong");
-		member1.setRegDate(LocalDateTime.now());
 
-		memberRepository.save(member1);
-
-	}
+//	@Test
+//	public void testRegister(){
+//		Member member1 = new Member();
+//		member1.setUserId("jupitar");
+//		member1.setPassword("1234");
+//		member1.setUserName("minyong");
+//		member1.setRegDate(LocalDateTime.now());
+//
+//		memberRepository.save(member1);
+//
+//	}
 
 
 //	
@@ -397,5 +399,31 @@ public class MemberTests {
 //			
 //		}
 //	}
+
+	@Transactional
+	@Test
+	public void testRegisterWithDetailAtTransactional() {
+		Member member1 = new Member();
+		member1.setUserId("jupiter");
+		member1.setPassword("1234");
+
+		MemberDetail memberDetail = new MemberDetail();
+		memberDetail.setUserName("Alex");
+		memberDetail.setEmail("jupiter@naver.com");
+		memberDetail.setMember(member1);
+		memberRepository.save(member1);
+
+		memberDetailRepository.save(memberDetail);
+
+	}
+
+
+	@Test
+	public void testRemoveWithDetail(){
+		memberDetailRepository.deleteAll();
+		memberRepository.deleteAll();
+	}
+
+
 
 }

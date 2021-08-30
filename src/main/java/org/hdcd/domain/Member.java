@@ -47,6 +47,7 @@ public class Member {
 	
 	@Id // 프라이머키
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="user_no")
 	//주키의 값을 자동생성 전략명시 DB의 identity 컬럼을 이용
 	private Long userNo;
 	
@@ -65,7 +66,7 @@ public class Member {
 	//@NotBlank
 	//@Size(max=3) // 여러개의 입력값 검증 규칙을 지정할수있다
 	//@Column(name="uname", length=100,nullable=false)
-	private String userName;
+	//private String userName;
 	
 	
 	//enum 이름을 db에 저장 // 문자열로
@@ -109,20 +110,20 @@ public class Member {
 	
 	//컬렉션을 테이블로 생성하여 1:n 관계를 다룬다
 	
-	@ElementCollection
-	@CollectionTable(
-	name="member_card",
-	joinColumns =  @JoinColumn(name="user_no"))
-	@OrderBy("user_no desc")
-	private List<Card> cardList;
-
-
-
-
-	public Card getCard(int i) {
-		// TODO Auto-generated method stub
-		return cardList.get(i);
-	}
+//	@ElementCollection
+//	@CollectionTable(
+//	name="member_card",
+//	joinColumns =  @JoinColumn(name="user_no"))
+//	@OrderBy("user_no desc")
+//	private List<Card> cardList;
+//
+//
+//
+//
+//	public Card getCard(int i) {
+//		// TODO Auto-generated method stub
+//		return cardList.get(i);
+//	}
 	
 //	private String[] carArray;
 //	private List<String> carList;
