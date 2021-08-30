@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.hdcd.constant.Gender;
 import org.hdcd.domain.*;
+import org.hdcd.repository.ItemRepository;
 import org.hdcd.repository.MemberDetailRepository;
 import org.hdcd.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,8 @@ public class MemberTests {
 	@Autowired
 	MemberDetailRepository memberDetailRepository;
 
-
+	@Autowired
+	ItemRepository itemRepository;
 //	@Test
 //	public void testRegister(){
 //		Member member1 = new Member();
@@ -299,43 +301,43 @@ public class MemberTests {
 //		}
 //	}	
 //
-	@Test
-	public void testRegister() {
-		Member member1 = new Member();
-		member1.setUserId("jihyen");
-		member1.setPassword("1234");
-		memberRepository.save(member1);
-
-		Member member2 = new Member();
-		member2.setUserId("mm");
-		member2.setPassword("0000");
-		memberRepository.save(member2);
-
-		Member member3 = new Member();
-		member3.setUserId("sdaas");
-		member3.setPassword("12344");
-		memberRepository.save(member3);
-	}
-
-	@Test
-	@Transactional
-	public void testRegisterWithDetailAtTransactional(){
-
-		Long userNo = 1L;
-		Member member1 = new Member();
-		member1.setUserNo(userNo);
-		member1.setUserId("jupiter");
-		member1.setPassword("1234");
-
-		MemberDetail memberDetail = new MemberDetail();
-		memberDetail.setUserNo(userNo);
-		memberDetail.setUserName("Alex");
-		memberDetail.setEmail("ajdcnd131@naver.com");
-		member1.setMemberDetail(memberDetail);
-
-		memberRepository.save(member1);
-
-	}
+//	@Test
+//	public void testRegister() {
+//		Member member1 = new Member();
+//		member1.setUserId("jihyen");
+//		member1.setPassword("1234");
+//		memberRepository.save(member1);
+//
+//		Member member2 = new Member();
+//		member2.setUserId("mm");
+//		member2.setPassword("0000");
+//		memberRepository.save(member2);
+//
+//		Member member3 = new Member();
+//		member3.setUserId("sdaas");
+//		member3.setPassword("12344");
+//		memberRepository.save(member3);
+//	}
+//
+//	@Test
+//	@Transactional
+//	public void testRegisterWithDetailAtTransactional(){
+//
+//		Long userNo = 1L;
+//		Member member1 = new Member();
+//		member1.setUserNo(userNo);
+//		member1.setUserId("jupiter");
+//		member1.setPassword("1234");
+//
+//		MemberDetail memberDetail = new MemberDetail();
+//		memberDetail.setUserNo(userNo);
+//		memberDetail.setUserName("Alex");
+//		memberDetail.setEmail("ajdcnd131@naver.com");
+//		member1.setMemberDetail(memberDetail);
+//
+//		memberRepository.save(member1);
+//
+//	}
 
 //	@Transactional
 //	@Test
@@ -467,5 +469,57 @@ public class MemberTests {
 //		memberRepository.deleteAll();
 //	}
 
+
+	@Test
+	public void testRegisterWithItem(){
+		Item item = new Item();
+		item.setItemName("apple");
+		item.setPrice(1000);
+
+		itemRepository.save(item);
+
+		Item item2 = new Item();
+		item.setItemName("orange");
+		item.setPrice(2300);
+
+		itemRepository.save(item2);
+
+		Member member = new Member();
+		member.setUserId("jupiter");
+		member.setPassword("1234");
+		member.setUserName("Alex");
+
+		member.addItem(item);
+		member.addItem(item2);
+
+		memberRepository.save(member);
+
+	}
+	@Transactional
+	@Test
+	public void testRegisterWithItemAtTransactional(){
+		Member member = new Member();
+		member.setUserId("jupiter");
+		member.setPassword("1234");
+		member.setUserName("Alex");
+
+		memberRepository.save(member);
+
+		Member member2 = new Member();
+		member2.setUserId("venus");
+		member2.setPassword("4567");
+		member2.setUserName("Holle");
+
+		memberRepository.save(member2);
+
+		Item item = new Item();
+		item.setItemName("Apple");
+		item.setPrice(1000);
+
+		item.addMember(member);
+		item.addMember(member2);
+
+		itemRepository.save(item);
+	}
 
 }

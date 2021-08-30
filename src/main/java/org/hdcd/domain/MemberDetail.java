@@ -29,12 +29,12 @@ public class MemberDetail {
 
 
     //일대일 단방향2정
-    @Column(name = "user_no")
-    private Long userNo;
-    //일대일 단방향
-
-    //오ㅣ래키
-    @OneToOne
-    @JoinColumn(name="user_no")
-    private Member member;
+//    @Column(name = "user_no")
+//    private Long userNo;
+//    //일대일 단방향
+//
+//    //오ㅣ래키
+//    @OneToOne
+//    @JoinColumn(name="user_no")
+//    private Member member;
 }

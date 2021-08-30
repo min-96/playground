@@ -4,20 +4,16 @@ package org.hdcd.domain;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
-import org.hdcd.constant.Gender;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import groovy.transform.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -25,7 +21,7 @@ import lombok.ToString;
 @Setter
 //@NoArgsConstructor
 //@RequiredArgsConstructor
-@ToString
+@ToString(exclude = "items")
 //jpa의 엔티티임을 의미
 @Entity
 @EqualsAndHashCode // 필드명으로 userNo equal과 hascode
@@ -52,7 +48,7 @@ public class Member {
 	//@NotBlank
 	//@Size(max=3) // 여러개의 입력값 검증 규칙을 지정할수있다
 	//@Column(name="uname", length=100,nullable=false)
-	//private String userName;
+	private String userName;
 	
 	
 	//enum 이름을 db에 저장 // 문자열로
@@ -80,13 +76,23 @@ public class Member {
 
 	//일대일 단방향 2
 	// 양방향 일 때 mapperBy 설정
-	//주인이 아닌 Member.memberDetail 에는 mapperdBy=member 속성을 사용해서 주인아님을 설정
-	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_no")
-	private MemberDetail memberDetail;
+	//주인이 아닌 Member.membrDetail 에는 mapperdBy=member 속성을 사용해서 주인아님을 설정
+//	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	@JoinColumn(name = "user_no")
+//	private MemberDetail memberDetail;
 
 
+	//회원테이블은 user_no 외래키로 회원상품 테이블과 연관관계를 맺는다.
+	//역방향 엔티티와 매핑할조인컬럼 정보를 지정
+	@ManyToMany
+	@JoinTable(name="user_item",joinColumns = @JoinColumn(name = "user_no"),
+	inverseJoinColumns = @JoinColumn(name = "item_no"))
+	private List<Item> items = new ArrayList<>();
 
+	public void addItem(Item item){
+		items.add(item);
+		item.getMembers().add(this);
+	}
 	
 //	@Email // 이메일형식인지 검증
 //	private String email;
