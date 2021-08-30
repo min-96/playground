@@ -215,11 +215,13 @@ public class CodeGroupTests {
 	
 //	
 	@Test
-	public void testRemove() {
-		repository.deleteById("A01");
+	public void testListByJoinQuery(){
+		List<Object[]> list = repository.getList2();
+
+		for(Object[] record : list)
+			System.out.println(record[0]+":"+record[1]+":"+record[2]+":"+record[3]+":"+record[4]);
+		}
 	}
-	
-	
 //	
 //	@Test
 //	public void testRegisterWithCodeDetail() {
@@ -257,4 +259,4 @@ public class CodeGroupTests {
 //
 //		repository.deleteById(groupCode);
 //	}
-}
+//}
