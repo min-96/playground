@@ -470,56 +470,56 @@ public class MemberTests {
 //	}
 
 
-	@Test
-	public void testRegisterWithItem(){
-		Item item = new Item();
-		item.setItemName("apple");
-		item.setPrice(1000);
-
-		itemRepository.save(item);
-
-		Item item2 = new Item();
-		item.setItemName("orange");
-		item.setPrice(2300);
-
-		itemRepository.save(item2);
-
-		Member member = new Member();
-		member.setUserId("jupiter");
-		member.setPassword("1234");
-		member.setUserName("Alex");
-
-		member.addItem(item);
-		member.addItem(item2);
-
-		memberRepository.save(member);
-
-	}
-	@Transactional
-	@Test
-	public void testRegisterWithItemAtTransactional(){
-		Member member = new Member();
-		member.setUserId("jupiter");
-		member.setPassword("1234");
-		member.setUserName("Alex");
-
-		memberRepository.save(member);
-
-		Member member2 = new Member();
-		member2.setUserId("venus");
-		member2.setPassword("4567");
-		member2.setUserName("Holle");
-
-		memberRepository.save(member2);
-
-		Item item = new Item();
-		item.setItemName("Apple");
-		item.setPrice(1000);
-
-		item.addMember(member);
-		item.addMember(member2);
-
-		itemRepository.save(item);
-	}
+//	@Test
+//	public void testRegisterWithItem(){
+//		Item item = new Item();
+//		item.setItemName("apple");
+//		item.setPrice(1000);
+//
+//		itemRepository.save(item);
+//
+//		Item item2 = new Item();
+//		item.setItemName("orange");
+//		item.setPrice(2300);
+//
+//		itemRepository.save(item2);
+//
+//		Member member = new Member();
+//		member.setUserId("jupiter");
+//		member.setPassword("1234");
+//		member.setUserName("Alex");
+//
+//		member.addItem(item);
+//		member.addItem(item2);
+//
+//		memberRepository.save(member);
+//
+//	}
+//	@Transactional
+//	@Test
+//	public void testRegisterWithItemAtTransactional(){
+//		Member member = new Member();
+//		member.setUserId("jupiter");
+//		member.setPassword("1234");
+//		member.setUserName("Alex");
+//
+//		memberRepository.save(member);
+//
+//		Member member2 = new Member();
+//		member2.setUserId("venus");
+//		member2.setPassword("4567");
+//		member2.setUserName("Holle");
+//
+//		memberRepository.save(member2);
+//
+//		Item item = new Item();
+//		item.setItemName("Apple");
+//		item.setPrice(1000);
+//
+//		item.addMember(member);
+//		item.addMember(member2);
+//
+//		itemRepository.save(item);
+//	}
 
 }

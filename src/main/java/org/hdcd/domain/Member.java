@@ -128,10 +128,17 @@ public class Member {
 	
 //	private String[] carArray;
 //	private List<String> carList;
-//	
+//
+	//일대다 연관
 	//양방향
 	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
 	private List<UserItem> userItems = new ArrayList<>();
 
+	public void addUserItem(UserItem userItem){
+		userItems.add(userItem);
+	}
 
+	public void removeUserItem(UserItem userItem){
+		userItems.remove(userItem);
+	}
 }

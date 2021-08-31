@@ -3,6 +3,7 @@ package org.hdcd.domain;
 
 import lombok.*;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 @NoArgsConstructor
@@ -11,9 +12,10 @@ import java.io.Serializable;
 @Setter
 @ToString
 public class UserItemId implements Serializable {
+
     private static final long serialVersionUUID=1L;
 
-    private Long Member;
+    private Long member;
     private Long item;
 
 }

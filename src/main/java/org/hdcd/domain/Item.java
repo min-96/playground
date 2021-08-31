@@ -14,7 +14,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString(exclude = "members")
+//@ToString(exclude = "members")
+@ToString
 @Entity
 public class Item {
     @Id
@@ -29,13 +30,13 @@ public class Item {
     private LocalDateTime regDate;
     @UpdateTimestamp
     private LocalDateTime upDate;
-    //다대다 양방향
-    @ManyToMany(mappedBy = "items")
-    private List<Member> members = new ArrayList<>();
+//    //다대다 양방향
+//    @ManyToMany(mappedBy = "items")
+//    private List<Member> members = new ArrayList<>();
 
-    public void addMember(Member member){
-        members.add(member);
-        member.getItems().add(this);
-    }
+//    public void addMember(Member member){
+//        members.add(member);
+//        member.getItems().add(this);
+//    }
 
 }
