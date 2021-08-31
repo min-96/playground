@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item</title>
+</head>
+
+<body>
+<H2>Register</H2>
+
+<form id ="item" action="success.html" th:action="@{register}"
+      th:object="${item}" method="POST" enctype="multipart/form-data">
+
+    <table>
+        <tr>
+            <td>상품명</td>
+            <td><input type="text" name="itemName" th:field="*{itemName}"/></td>
+        </tr>
+
+        <tr>
+            <td>가격</td>
+            <td><input type="text" name="price" th:field="*{price}"/></td>
+        </tr>
+
+        <tr>
+            <td>파일</td>
+            <td><input type="file" name="picture"/> </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td><textarea name="description" th:field="*{description}"></textarea></td>
+
+        </tr>
+    </table>
+</form>
+<div>
+    <button type="submit" name="Register">Register</button>
+</div>
+</body>
+</html>

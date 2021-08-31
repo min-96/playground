@@ -114,29 +114,29 @@ public class EntitiyTests {
            memberRepository.save(member);
         }
      }
-     @Transactional
-    @Test
-    public void testRemoveUserItemAtTranscational2(){
-        Optional<Member> memberOptional = memberRepository.findById(1L);
-
-        Member member=null;
-        if(memberOptional.isPresent()){
-             member = memberOptional.get();
-        }
-
-        Optional<Item> itemOptional = itemRepository.findById(1L);
-
-        Item item=null;
-        if(itemOptional.isPresent()){
-            item= itemOptional.get();
-        }
-
-        UserItemId userItemId = new UserItemId();
-       userItemId.setMember(member.getUserNo());
-        userItemId.setItem(item.getItemNo());
-
-        userItemRepository.deleteById(userItemId);
-
-
-    }
+//     @Transactional
+//    @Test
+//    public void testRemoveUserItemAtTranscational2(){
+//        Optional<Member> memberOptional = memberRepository.findById(1L);
+//
+//        Member member=null;
+//        if(memberOptional.isPresent()){
+//             member = memberOptional.get();
+//        }
+//
+//        Optional<Item> itemOptional = itemRepository.findById(1L);
+//
+//        Item item=null;
+//        if(itemOptional.isPresent()){
+//            item= itemOptional.get();
+//        }
+//
+//        UserItemId userItemId = new UserItemId();
+//       userItemId.setMember(member.getUserNo());
+//        userItemId.setItem(item.getItemNo());
+//
+//        userItemRepository.deleteById(userItemId);
+//
+//
+//    }
 }
