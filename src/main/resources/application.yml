@@ -1,0 +1,9 @@
+spring:
+  thymeleaf:
+    cache: false
+    suffix: .html
+    #prefix 기본경로
+    #prefix: classpath:/templates/
+  devtools:
+    restart:
+      enabled: true
