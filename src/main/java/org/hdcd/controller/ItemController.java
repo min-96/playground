@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -35,6 +36,16 @@ public class ItemController {
     //프로퍼티의 값을 읽어와 변수로 사용하겠다.
     @Value("${upload.path}")
     private String uploadPath;
+
+
+    @GetMapping("/list")
+    public void list(Model model) throws Exception{
+        List<Item> itemList = this.itemService.list();
+
+        model.addAttribute("itemList",itemList);
+
+
+    }
 
     @GetMapping("/register")
     public String registerForm(Model model){
@@ -50,7 +61,7 @@ public class ItemController {
         
         String createFileName= uploadFile(file.getOriginalFilename(),file.getBytes());
         item.setPictureUrl(createFileName);
-        this.itemService.regist(item);
+        this.itemService.register(item);
 
         model.addAttribute("msg","등록이완료됨");
         return "item/success";

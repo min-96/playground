@@ -10,7 +10,7 @@ import java.util.List;
 public interface ItemService {
 
 
-    public void regist(Item item);
+    public void register(Item item);
 
 
     public Item read(Long itemId);

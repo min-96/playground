@@ -17,7 +17,7 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     @Transactional
-    public void regist(Item item) {
+    public void register(Item item) {
         repository.save(item);
 
     }
@@ -30,7 +30,8 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public List<Item> list() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC,"itemId"));
+
+        return repository.findAll();
     }
 
     @Override
