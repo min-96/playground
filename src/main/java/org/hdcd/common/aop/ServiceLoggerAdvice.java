@@ -2,6 +2,7 @@ package org.hdcd.common.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,11 @@ public class ServiceLoggerAdvice {
         log.info("startLog : "+jp.getSignature());
         //클라이언트가 메소드를 호출할 때 넘겨준 인자 목록을 Object 배열 로 리턴
         log.info("startLog :"+ Arrays.toString(jp.getArgs()));
-
-
+    }
+    //afterRunning - 조인포인트가 정상적으로 종료한 후에 실행된다 예외가 발생하면 실행되지 않음
+    @AfterReturning("execution(* org.hdcd.service.BoardService*.*(..))")
+    public void  logRunning(JoinPoint jp){
+        log.info("logRunning");
+        log.info("logRunning:"+jp.getSignature());
     }
 }
