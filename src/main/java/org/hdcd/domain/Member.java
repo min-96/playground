@@ -76,6 +76,9 @@ public class Member {
 	@UpdateTimestamp // update 자동시간
 	private LocalDateTime upDate;
 
+	@Transient
+	private String auth;
+
 	//일대일 단방향 2
 	// 양방향 일 때 mapperBy 설정
 	//주인이 아닌 Member.membrDetail 에는 mapperdBy=member 속성을 사용해서 주인아님을 설정
@@ -131,14 +134,14 @@ public class Member {
 //
 	//일대다 연관
 	//양방향
-	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
-	private List<UserItem> userItems = new ArrayList<>();
-
-	public void addUserItem(UserItem userItem){
-		userItems.add(userItem);
-	}
-
-	public void removeUserItem(UserItem userItem){
-		userItems.remove(userItem);
-	}
+//	@OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+//	private List<UserItem> userItems = new ArrayList<>();
+//
+//	public void addUserItem(UserItem userItem){
+//		userItems.add(userItem);
+//	}
+//
+//	public void removeUserItem(UserItem userItem){
+//		userItems.remove(userItem);
+//	}
 }

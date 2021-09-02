@@ -1,39 +1,26 @@
 package org.hdcd.controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.hdcd.domain.Card;
-import org.hdcd.domain.CodeLabelValue;
-import org.hdcd.domain.FileMember;
 import org.hdcd.domain.Member;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hdcd.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import javassist.compiler.MemberCodeGen;
 import lombok.extern.slf4j.Slf4j;
 
 
 
 @Slf4j
 @Controller
-@RequestMapping("/member")
+//@RequestMapping("/member")
+@RequestMapping("/user")
 public class MemberController {
+
+	@Autowired
+	MemberService memberService;
 
 		public MemberController() {
 			log.info("member");
@@ -373,7 +360,21 @@ public class MemberController {
 //		model.addAttribute("member",new Member());
 //		return "member/registerForm1";
 //	}
+//-------------------트랜잭션------------------
 
+	@GetMapping("/register")
+	public void registerForm(Member member, Model model){
+
+	}
+
+	@PostMapping("/register")
+	public String register(Member member, Model model) throws Exception {
+			memberService.register(member);
+
+			model.addAttribute("msg","등록이 완려되었습니다");
+
+	return "user/success";
+	}
 
 }
 

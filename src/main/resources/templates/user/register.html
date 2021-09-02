@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <title>User</title>
+</head>
+<body>
+<h3>REGISTER</h3>
+<form id='member' action='success.html' th:action="@{register}" th:object="${member}" method="POST">
+    <table>
+        <tr>
+            <td>userid</td>
+            <td>
+                <input type='text' name='userId' th:field='*{userId}' />
+            </td>
+
+        </tr>
+        <tr>
+            <td>userpw</td>
+            <td>
+                <input type='text' name='userPw' th:field='*{password}' />
+            </td>
+            <td>
+                <font color='red'>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{userPw}">userPw의 에러 메시지</span>
+                </font>
+            </td>
+        </tr>
+        <tr>
+            <td>username</td>
+            <td>
+                <input type='text' name='userName' th:field='*{userName}' />
+            </td>
+            <td>
+            <font color='red'>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">UserName의 에러메세지</span></font>
+        </td>
+        </tr>
+    </table>
+        <div>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
+</form>
+</body>
+</html>

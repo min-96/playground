@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hdcd.domain.Board;
 import org.hdcd.domain.QBoard;
+import org.hdcd.repository.CustomerBoardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +13,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import com.querydsl.jpa.JPQLQuery;
 
 //사용자 인터페이스
-public class BoardRepositoryImpl extends QuerydslRepositorySupport implements CustomerBoardRepository{
+public class BoardRepositoryImpl extends QuerydslRepositorySupport implements CustomerBoardRepository {
 
 	public BoardRepositoryImpl() {
 		super(Board.class);
