@@ -3,6 +3,7 @@ package org.hdcd.service;
 import java.util.List;
 
 import org.hdcd.domain.Board;
+import org.hdcd.exception.BoardRecordNotFoundException;
 import org.hdcd.vo.PageRequestVO;
 import org.springframework.data.domain.Page;
 
@@ -20,7 +21,7 @@ public interface BoardService {
 
 	public void modify(Board board) throws Exception;
 
-	public Board read(Long boardNo) throws Exception;
+	public Board read(Long boardNo) throws Exception, BoardRecordNotFoundException;
 
 	public Page<Board> Plist(PageRequestVO pageRequestVO);
 

@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,8 @@ public class BoardController {
 	
 	
 	@GetMapping("/register")
-	public String registerForm(Board board,Model model) {
+	//@Valudated 유효성검사
+	public String registerForm(@Validated Board board, Model model) {
 		
 		return "board/register";
 	
@@ -99,6 +101,7 @@ public class BoardController {
 	
 	@GetMapping("/read")
 	public void read(Model model,Long boardNo,@ModelAttribute("pgrq")PageRequestVO pageRequestVO) throws Exception {
+		//게시판의 글이 존재하지 않으면 사용자가 정의한 예외를 발생시킴
 		model.addAttribute(bservice.read(boardNo));
 	}
 	

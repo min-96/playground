@@ -8,6 +8,7 @@ import java.util.List;
 //import org.hdcd.dao.BoardDao;
 import org.hdcd.domain.Board;
 //import org.hdcd.domain.QBoard;
+import org.hdcd.exception.BoardRecordNotFoundException;
 import org.hdcd.repository.BoardRepository;
 import org.hdcd.vo.PageRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,8 +145,16 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	@Transactional(readOnly=true) // 읽기전용
-	public Board read(Long boardNo) throws Exception {
+	public Board read(Long boardNo) throws Exception, BoardRecordNotFoundException {
 		// TODO Auto-generated method stub
+
+		Board board=null;
+		if(repository.existsById(boardNo)){
+			board=repository.getOne(boardNo);
+		}
+		else{
+			throw new BoardRecordNotFoundException("Not Found boardNo="+boardNo);
+		}
 		return repository.getOne(boardNo);
 	}
 
