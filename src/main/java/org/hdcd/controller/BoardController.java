@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -55,7 +56,13 @@ public class BoardController {
 	
 	@PostMapping("/register")
 	//@Valudated 유효성 검사
-	public String register(@Validated Board board,Model model,RedirectAttributes rttr) throws Exception {
+	//BindingResult는 요청데이터의 바인딩 에러와 검사 에러정보가 저장된다.
+	public String register(@Validated Board board, BindingResult result, Model model, RedirectAttributes rttr) throws Exception {
+		//만약 에러정보를 가지면 다시 입력화면으로 돌아간다.
+		if(result.hasErrors()){
+			return "board/register";
+		}
+
 		board.setRegDate(LocalDateTime.now());
 		bservice.register(board); // set을 했으니 게시판을 넘김
 		

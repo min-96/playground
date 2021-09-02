@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -53,6 +54,7 @@ public class Board {
 	private String content;
 	
 	//@Column(name="writer")
+	@Size(max=3)
 	private String writer;
 	
 	//@Column(name="reg_date")

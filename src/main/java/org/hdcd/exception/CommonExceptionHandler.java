@@ -1,6 +1,8 @@
 package org.hdcd.exception;
 
+
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -11,9 +13,10 @@ public class CommonExceptionHandler {
 
     //괄호안에 설정한 예외타입을 해당 메서드가 처리한다는것있음 의미
     @ExceptionHandler(Exception.class)
-    public String handle(Exception e){
+    public String handle(Exception e, Model model){
         log.info("error : "+e.toString());
 
+        model.addAttribute("exception"+e);
         return "error/errorCommon";
     }
 }
