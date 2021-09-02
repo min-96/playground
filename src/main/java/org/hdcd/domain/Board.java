@@ -45,6 +45,7 @@ public class Board {
 	//@NonNull
 	//@NotBlank
 	//@Column(name="title")
+	@NotBlank
 	private String title;
 	//@NonNull
 	//@Column(name="content")

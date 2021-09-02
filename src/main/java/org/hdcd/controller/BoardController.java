@@ -46,7 +46,7 @@ public class BoardController {
 	
 	@GetMapping("/register")
 	//@Valudated 유효성검사
-	public String registerForm(@Validated Board board, Model model) {
+	public String registerForm(Board board, Model model) {
 		
 		return "board/register";
 	
@@ -54,7 +54,8 @@ public class BoardController {
 	
 	
 	@PostMapping("/register")
-	public String register(Board board,Model model,RedirectAttributes rttr) throws Exception {
+	//@Valudated 유효성 검사
+	public String register(@Validated Board board,Model model,RedirectAttributes rttr) throws Exception {
 		board.setRegDate(LocalDateTime.now());
 		bservice.register(board); // set을 했으니 게시판을 넘김
 		
