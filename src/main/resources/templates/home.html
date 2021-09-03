@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http//www.ultrq.net.nz/thymeleaf/layout"
 layout:decorate="~{layout/main_template}">
 <head>
@@ -21,6 +21,8 @@ layout:decorate="~{layout/main_template}">
 	
 	<p th:text="${serverTime}"> 현재 서버시간은 ${serverTime}.</p>
 </div>
+
+<div th:text="${session.userInfo.userId}" th:unless="${session==null}">${userInfo.userId}</div>
 	
 <!-- <div th:insert="~{fragment/footer::footer}"></div> -->
 </body>

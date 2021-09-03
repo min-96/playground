@@ -23,7 +23,9 @@ public class LoginController {
      log.info("login userId = "+user.getUserId());
      log.info("lpgin userPw ="+user.getUserPw());
 
-     model.addAttribute("result","로그인이 되었스빈다.");
-             return "sucess";
+     model.addAttribute("user",user);
+
+//     model.addAttribute("result","로그인이 되었스빈다.");
+             return "home";
     }
 }
