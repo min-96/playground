@@ -11,9 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 public class LoginController {
     @GetMapping("/login")
-    public String LoginForm(){
+    public String LoginForm(String error,String logout,Model model){
+    //에러메세지와 로그아웃메세지를 파라미터로 사용
+        log.info("error :" +error);
+        log.info("logout : "+logout);
 
-        log.info("loginform");
+        if(error !=null){
+            model.addAttribute("error","Lgoin Error!");
+        }
+        if(logout !=null){
+            model.addAttribute("logout","logout!");
+        }
+
         return "loginForm";
     }
 

@@ -38,7 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole("ADMIN");
 
     //폼 기반 인증기능을 사용한다.
-        http.formLogin();
+        http.formLogin()
+
+        //사용자가 정의한 로그인페이지 URI를 지정한다
+                .loginPage("/login");
+
+
     //접근 거부 처리자의 URI를 지정
 //       http.exceptionHandling()
 //                .accessDeniedPage("/accessError");
