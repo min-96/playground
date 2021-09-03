@@ -35,6 +35,8 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
         String classSimpleName = clazz.getSimpleName();
         String methodName = method.getName();
 
-        log.info("[ACESS CINTROLLER]" + className+"."+methodName);
+       log.info("ACESS CONTROLLER :" + className+"."+methodName);
+        log.info("[SUCESS CONTROLLER]{}.{}",method.getDeclaringClass().getSimpleName(),method.getName());
+
     }
 }
