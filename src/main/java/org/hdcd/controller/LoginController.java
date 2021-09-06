@@ -17,6 +17,7 @@ public class LoginController {
         log.info("error :" +error);
         log.info("logout : "+logout);
 
+
         if(error !=null){
             model.addAttribute("error","Lgoin Error!");
         }
