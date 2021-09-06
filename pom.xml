@@ -55,6 +55,11 @@
   <groupId>nz.net.ultraq.thymeleaf</groupId>
   <artifactId>thymeleaf-layout-dialect</artifactId>
 </dependency>
+<!--	타임리프에 springsecurity 적용을 위한 라입러리-->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
   <!--    Validation 라이브러리 -->
 <dependency>
   <groupId>org.springframework.boot</groupId>

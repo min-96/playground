@@ -17,6 +17,7 @@ public class CustomerAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
         log.info("handle");
 
+        log.info("Redirect......");
         httpServletResponse.sendRedirect("/accessError");
     }
 }

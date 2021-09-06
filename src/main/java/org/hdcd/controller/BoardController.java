@@ -48,7 +48,7 @@ public class BoardController {
 	@GetMapping("/register")
 	//@Valudated 유효성검사
 	public String registerForm(Board board, Model model) {
-		
+		log.info("registerForm : access to member");
 		return "board/register";
 	
 	}
@@ -104,7 +104,7 @@ public class BoardController {
 		model.addAttribute("search",searchTypeCodeValueList);
 		
 		
-		
+		log.info("list: access to all");
 	}
 	
 	@GetMapping("/read")
