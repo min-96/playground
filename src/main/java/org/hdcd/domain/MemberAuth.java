@@ -12,13 +12,16 @@ import javax.persistence.*;
 @ToString
 @Table(name = "member_auth")
 public class MemberAuth{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userAuthNo;
 
-    @Column(length = 6)
+
+    @Column(length = 50)
     private String auth;
 
+    @Id
+    @Column(name = "user_auth_no")
+    private Long userAuthNo;
+
+    @Column(name ="user_no")
     private Long userNo;
 
 }

@@ -1,8 +1,9 @@
 package org.hdcd.config.security;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hdcd.domain.User;
+
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
@@ -25,7 +26,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         User customerUser =(User) authentication.getPrincipal();
         log.info("customerUser : " + customerUser);
 
-        log.info("userName: " + customerUser.getUserName());
+        log.info("userName: " + customerUser.getUsername());
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

@@ -22,7 +22,7 @@ import lombok.ToString;
 //@NoArgsConstructor
 //@RequiredArgsConstructor
 //@ToString(exclude = "items")
-@ToString(exclude = "userItems")
+@ToString
 
 //jpa의 엔티티임을 의미
 @Entity
@@ -76,8 +76,13 @@ public class Member {
 	@UpdateTimestamp // update 자동시간
 	private LocalDateTime upDate;
 
-	@Transient
-	private String auth;
+//	@Transient
+//	private String auth;
+
+
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name="user_no")
+	private List<MemberAuth> authList = new ArrayList<>();
 
 	//일대일 단방향 2
 	// 양방향 일 때 mapperBy 설정

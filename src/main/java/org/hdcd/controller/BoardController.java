@@ -52,6 +52,7 @@ public class BoardController {
 		return "board/register";
 	
 	}
+
 	
 	
 	@PostMapping("/register")

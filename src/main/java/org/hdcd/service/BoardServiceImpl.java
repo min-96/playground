@@ -24,6 +24,8 @@ import com.querydsl.core.BooleanBuilder;
 
 import lombok.RequiredArgsConstructor;
 
+import javax.transaction.Transactional;
+
 @RequiredArgsConstructor
 @Service
 public class BoardServiceImpl implements BoardService {
